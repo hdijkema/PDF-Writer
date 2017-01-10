@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EFontStretch.h"
 
@@ -31,9 +32,12 @@
 
 typedef std::pair<bool,FT_Short> BoolAndFTShort;
 
-class IFreeTypeFaceExtender
+class PW_EXTERN IFreeTypeFaceExtender
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IFreeTypeFaceExtender(){}
 	
 	// Italic Angle - if you don't know...just return 0

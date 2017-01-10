@@ -19,31 +19,35 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
-class PDFPage;
-class DictionaryContext;
-class ObjectsContext;
-class CatalogInformation;
-class ResourcesDictionary;
-class PDFFormXObject;
-class JPEGImageHandler;
-class TIFFImageHandler;
-class PDFDocumentHandler;
-class PDFDictionary;
-class PDFParser;
+class PW_EXTERN PDFPage;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN CatalogInformation;
+class PW_EXTERN ResourcesDictionary;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN JPEGImageHandler;
+class PW_EXTERN TIFFImageHandler;
+class PW_EXTERN PDFDocumentHandler;
+class PW_EXTERN PDFDictionary;
+class PW_EXTERN PDFParser;
 
 namespace PDFHummus
 {
-	class DocumentContext;
+	class PW_EXTERN DocumentContext;
 }
 
 using namespace PDFHummus;
 
-class IDocumentContextExtender
+class PW_EXTERN IDocumentContextExtender
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IDocumentContextExtender(){}
 
 	// add items to the page dictionary while it's written

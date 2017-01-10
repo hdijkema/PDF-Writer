@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EFontStretch.h"
 #include "EStatusCode.h"
@@ -31,9 +32,9 @@
 #include <string>
 #include <vector>
 
-class IFreeTypeFaceExtender;
-class IWrittenFont;
-class ObjectsContext;
+class PW_EXTERN IFreeTypeFaceExtender;
+class PW_EXTERN IWrittenFont;
+class PW_EXTERN ObjectsContext;
 
 
 
@@ -44,10 +45,13 @@ typedef std::list<std::string> StringList;
 typedef std::list<unsigned long> ULongList;
 typedef std::list<ULongList> ULongListList;
 
-class FreeTypeFaceWrapper
+class PW_EXTERN FreeTypeFaceWrapper
 {
 public:
-	class IOutlineEnumerator;
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
+	class PW_EXTERN IOutlineEnumerator;
 
 	// first overload - all but type ones. the file path is just given for storage (later queries may want it)
 	FreeTypeFaceWrapper(FT_Face inFace,const std::string& inFontFilePath,long inFontIndex,bool inDoOwn = true);
@@ -120,6 +124,9 @@ public:
 	FT_Error LoadGlyph(FT_UInt inGlyphIndex, FT_Int32 inFlags = 0);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	FT_Face mFace;
 	IFreeTypeFaceExtender* mFormatParticularWrapper;
@@ -151,14 +158,24 @@ private:
 	void SelectDefaultEncoding();
 
 public:
-	class IOutlineEnumerator {
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
+	class PW_EXTERN IOutlineEnumerator {
 	public:
+#	ifdef _MSC_VER
+#	  pragma warning(default:4251)
+#	endif
 		IOutlineEnumerator(){ mUPM = 0; }
 		virtual ~IOutlineEnumerator(){};
 
 		inline FT_Short UPM() const { return mUPM; } //typically 1000 or 2048
 
 	protected:
+
 		//in font em units relative to UPM
 		virtual bool Moveto(FT_Short x, FT_Short y) =0; //ret false to abort
 		virtual bool Lineto(FT_Short x, FT_Short y) =0;
@@ -166,6 +183,9 @@ public:
 		virtual bool Close() =0;
 
 	private:
+#	ifdef _MSC_VER
+#	  pragma warning(disable:4251)
+#	endif
 		friend bool FreeTypeFaceWrapper::GetGlyphOutline(unsigned int inGlyphIndex, IOutlineEnumerator& inEnumerator);
 		static int outline_moveto(const FT_Vector* to, void *closure);
 		static int outline_lineto(const FT_Vector* to, void *closure);

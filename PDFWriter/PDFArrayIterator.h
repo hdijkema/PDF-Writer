@@ -3,17 +3,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFWriter.h"
 #include "PDFObjectCast.h"
 #include "PDFArray.h"
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-class PDFDictionaryIterator;
+class PW_EXTERN PDFDictionaryIterator;
 
-class PDFArrayIterator
+class PW_EXTERN PDFArrayIterator
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     PDFArrayIterator(PDFParser &parser) :
                         mParser(parser)
     {
@@ -28,6 +32,9 @@ public:
     unsigned long         GetLength();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
     PDFObjectCastPtr<PDFArray> mArray;
     PDFParser &mParser;
 };

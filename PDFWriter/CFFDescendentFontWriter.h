@@ -19,11 +19,15 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IDescendentFontWriter.h"
 
-class CFFDescendentFontWriter: public IDescendentFontWriter
+class PW_EXTERN CFFDescendentFontWriter: public IDescendentFontWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CFFDescendentFontWriter(void);
 	~CFFDescendentFontWriter(void);
 
@@ -40,6 +44,9 @@ public:
 									ObjectsContext* inObjectsContext);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	ObjectIDType mEmbeddedFontFileObjectID;
 
 };

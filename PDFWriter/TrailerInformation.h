@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IOBasicTypes.h"
 #include "ObjectsBasicTypes.h"
 #include "InfoDictionary.h"
@@ -30,9 +31,12 @@ using namespace IOBasicTypes;
 typedef std::pair<bool,LongFilePositionType> BoolAndLongFilePositionType;
 typedef std::pair<bool,ObjectReference> BoolAndObjectReference;
 
-class TrailerInformation
+class PW_EXTERN TrailerInformation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	TrailerInformation(void);
 	~TrailerInformation(void);
 
@@ -54,6 +58,9 @@ public:
 	void Reset();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	LongFilePositionType mPrev;
 
 	ObjectReference mRootReference;

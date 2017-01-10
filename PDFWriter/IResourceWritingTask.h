@@ -19,19 +19,23 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
-class DictionaryContext;
-class ObjectsContext;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN ObjectsContext;
 namespace PDFHummus
 {
-    class DocumentContext;  
+    class PW_EXTERN DocumentContext;  
 };
 
-class IResourceWritingTask
+class PW_EXTERN IResourceWritingTask
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     virtual ~IResourceWritingTask(){}
     
     virtual PDFHummus::EStatusCode Write(DictionaryContext* inResoruceCategoryContext,

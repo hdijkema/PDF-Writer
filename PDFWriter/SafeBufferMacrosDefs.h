@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #ifdef WIN32
 	#include "UnicodeString.h"

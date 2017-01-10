@@ -19,19 +19,23 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
-class PDFFormXObject;
-class ObjectsContext;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN ObjectsContext;
 namespace PDFHummus
 {
-    class DocumentContext;  
+    class PW_EXTERN DocumentContext;  
 };
 
-class IFormEndWritingTask
+class PW_EXTERN IFormEndWritingTask
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     virtual ~IFormEndWritingTask(){}
     
     virtual PDFHummus::EStatusCode Write(PDFFormXObject* inFormXObject,

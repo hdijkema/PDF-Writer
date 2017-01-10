@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	Main class for PDF library. entry point for writing PDFs.
 
@@ -67,15 +68,18 @@ struct PDFCreationSettings
 
 };
 
-class PageContentContext;
-class PDFFormXObject;
-class PDFImageXObject;
-class PDFUsedFont;
-class IByteWriterWithPosition;
+class PW_EXTERN PageContentContext;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN PDFImageXObject;
+class PW_EXTERN PDFUsedFont;
+class PW_EXTERN IByteWriterWithPosition;
 
-class PDFWriter
+class PW_EXTERN PDFWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	PDFWriter(void);
 	~PDFWriter(void);
@@ -295,6 +299,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	ObjectsContext mObjectsContext;
 	PDFHummus::DocumentContext mDocumentContext;

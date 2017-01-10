@@ -19,10 +19,14 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
-class PDFRectangle
+class PW_EXTERN PDFRectangle
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFRectangle(void);
 	~PDFRectangle(void);
 

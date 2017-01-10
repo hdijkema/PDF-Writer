@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IndirectObjectsReferenceRegistry.h"
@@ -30,19 +31,22 @@
 
 
 
-class IByteWriterWithPosition;
-class DictionaryContext;
-class PDFStream;
-class IObjectsContextExtender;
-class ObjectsContext;
-class PDFParser;
-class EncryptionHelper;
+class PW_EXTERN IByteWriterWithPosition;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN PDFStream;
+class PW_EXTERN IObjectsContextExtender;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFParser;
+class PW_EXTERN EncryptionHelper;
 
 typedef std::list<DictionaryContext*> DictionaryContextList;
 
-class ObjectsContext
+class PW_EXTERN ObjectsContext
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	ObjectsContext(void);
 	~ObjectsContext(void);
 
@@ -138,6 +142,9 @@ public:
 	PDFHummus::EStatusCode ReadState(PDFParser* inStateReader,ObjectIDType inObjectID);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IObjectsContextExtender* mExtender;
 	IByteWriterWithPosition* mOutputStream;
 	IndirectObjectsReferenceRegistry mReferencesRegistry;

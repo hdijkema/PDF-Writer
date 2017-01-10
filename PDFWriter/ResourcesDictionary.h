@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "SingleValueContainerIterator.h"
 #include "MapIterator.h"
@@ -33,11 +34,14 @@
 typedef std::set<std::string> StringSet;
 typedef std::map<ObjectIDType,std::string> ObjectIDTypeToStringMap;
 
-class PDFImageXObject;
+class PW_EXTERN PDFImageXObject;
 
-class ResourcesDictionary
+class PW_EXTERN ResourcesDictionary
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	ResourcesDictionary(void);
 	virtual ~ResourcesDictionary(void);
 
@@ -96,6 +100,9 @@ public:
 	MapIterator<ObjectIDTypeToStringMap> GetShadingsIterator();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	StringSet mProcsets;
     unsigned long mFormXObjectsCount;

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "GraphicState.h"
 #include "EStatusCode.h"
@@ -26,9 +27,12 @@
 
 typedef std::list<GraphicState> GraphicStateList;
 
-class GraphicStateStack
+class PW_EXTERN GraphicStateStack
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	GraphicStateStack(void);
 	~GraphicStateStack(void);
 
@@ -41,5 +45,8 @@ public:
 	GraphicState& GetCurrentState();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	GraphicStateList mGraphicStateStack;
 };

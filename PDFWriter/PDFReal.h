@@ -19,11 +19,15 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFObject.h"
 
-class PDFReal : public PDFObject
+class PW_EXTERN PDFReal : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	enum EType
 	{
@@ -37,5 +41,8 @@ public:
 	operator double() const;
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	double mValue;
 };

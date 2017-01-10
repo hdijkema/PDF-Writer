@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IOBasicTypes.h"
 #include <utility>
@@ -27,9 +28,12 @@
 
 typedef std::pair<bool,IOBasicTypes::Byte> BoolAndByte;
 
-class PDFDocEncoding
+class PW_EXTERN PDFDocEncoding
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFDocEncoding(void);
 	~PDFDocEncoding(void);
 

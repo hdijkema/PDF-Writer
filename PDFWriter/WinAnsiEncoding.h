@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IOBasicTypes.h"
 #include <utility>
@@ -28,9 +29,12 @@
 typedef std::pair<bool,IOBasicTypes::Byte> BoolAndByte;
 
 
-class WinAnsiEncoding
+class PW_EXTERN WinAnsiEncoding
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	WinAnsiEncoding(void);
 	~WinAnsiEncoding(void);
 

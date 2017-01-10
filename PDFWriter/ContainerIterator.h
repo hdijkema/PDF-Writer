@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 /*
 	Abstract Generic template for list single-self-contained iterator.
@@ -36,18 +37,24 @@
 
 // some minor template specialization to differ const lists from non const lists
 template <class T>
-class ContainerTraits
+class PW_EXTERN ContainerTraits
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     
     typedef typename T::iterator iteratorType;
 
 };
 
 template <class T>
-class ContainerTraits<const T>
+class PW_EXTERN ContainerTraits<const T>
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     
     typedef typename T::const_iterator iteratorType;
 
@@ -55,9 +62,12 @@ public:
 
 // the real deal
 template <class T>
-class ContainerIterator
+class PW_EXTERN ContainerIterator
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     
 	ContainerIterator(T& inContainer);
 	ContainerIterator(const ContainerIterator<T>& inOtherIterator);
@@ -66,10 +76,14 @@ public:
 	bool IsFinished();
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
 	typename ContainerTraits<T>::iteratorType mEndPosition;
 	bool mFirstMove;
     
 protected:
+
 	typename ContainerTraits<T>::iteratorType mCurrentPosition;
 };
 

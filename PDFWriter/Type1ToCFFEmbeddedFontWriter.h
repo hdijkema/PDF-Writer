@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
 #include "Type1Input.h"
@@ -44,12 +45,15 @@ typedef std::map<std::string,unsigned short> StringToUShortMap;
 typedef std::pair<bool,unsigned short> BoolAndUShort;
 typedef std::set<std::string> StringSet;
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
 
-class Type1ToCFFEmbeddedFontWriter
+class PW_EXTERN Type1ToCFFEmbeddedFontWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	Type1ToCFFEmbeddedFontWriter(void);
 	~Type1ToCFFEmbeddedFontWriter(void);
 
@@ -61,6 +65,9 @@ public:
 									ObjectIDType& outEmbeddedFontObjectID);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	Type1Input mType1Input;
 	InputFile mType1File;
 	CFFPrimitiveWriter mPrimitivesWriter;

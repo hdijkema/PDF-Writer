@@ -19,16 +19,23 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
-class FSType
+class PW_EXTERN FSType
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	FSType(unsigned short inFSTypeValue) {mFSTypeValue = inFSTypeValue;}
 
 	// using Adobe applications policy as published in FontPolicies.pdf [note that if multiple bits are set the least restrictive takes over]
 	// so there are just 3 options for not embedding
 	bool CanEmbed(){return (mFSTypeValue != 0x2) && (mFSTypeValue != 0x0200) && (mFSTypeValue != 0x0202);}
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	unsigned short mFSTypeValue;
 };

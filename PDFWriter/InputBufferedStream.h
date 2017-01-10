@@ -19,15 +19,19 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReaderWithPosition.h"
 
 #define DEFAULT_BUFFER_SIZE 256*1024
 
-class InputBufferedStream : public IByteReaderWithPosition
+class PW_EXTERN InputBufferedStream : public IByteReaderWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	/*
 		default constructor with default buffer size
 	*/
@@ -66,6 +70,9 @@ public:
 	IByteReaderWithPosition* GetSourceStream();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IOBasicTypes::Byte* mBuffer;
 	IOBasicTypes::LongBufferSizeType mBufferSize;
 	IOBasicTypes::Byte* mCurrentBufferIndex;

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFObject.h"
 #include "SingleValueContainerIterator.h"
 
@@ -28,9 +29,12 @@
 
 typedef std::vector<PDFObject*> PDFObjectVector;
 
-class PDFArray : public PDFObject
+class PW_EXTERN PDFArray : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	enum EType
 	{
@@ -51,5 +55,8 @@ public:
 	unsigned long GetLength();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PDFObjectVector mValues;
 };

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "OpenTypePrimitiveReader.h"
@@ -192,9 +193,12 @@ enum EOpenTypeInputType
 	EOpenTypeCFF
 };
 
-class OpenTypeFileInput
+class PW_EXTERN OpenTypeFileInput
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OpenTypeFileInput(void);
 	~OpenTypeFileInput(void);
 
@@ -234,6 +238,9 @@ public:
 	CFFFileInput mCFF;
 	
 private:
+#	ifdef _MSC_VER
+#		pragma warning(disable:4251)
+#	endif
 	OpenTypePrimitiveReader mPrimitivesReader;
 	EOpenTypeInputType mFontType;
 	unsigned short mTablesCount;

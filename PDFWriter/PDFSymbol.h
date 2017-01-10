@@ -19,15 +19,19 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFObject.h"
 
 #include <string>
 
 
 
-class PDFSymbol : public PDFObject
+class PW_EXTERN PDFSymbol : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	enum EType
 	{
@@ -40,6 +44,9 @@ public:
 	const std::string& GetValue() const;
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	std::string mValue;
 };

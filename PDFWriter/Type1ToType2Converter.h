@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IType1InterpreterImplementation.h"
@@ -30,8 +31,8 @@
 
 
 
-class IByteWriter;
-class Type1Input;
+class PW_EXTERN IByteWriter;
+class PW_EXTERN Type1Input;
 
 struct ConversionNode
 {
@@ -51,9 +52,12 @@ struct Stem
 	long mExtent;
 };
 
-class StemLess : public std::binary_function<const Stem,const Stem,bool>
+class PW_EXTERN StemLess : public std::binary_function<const Stem,const Stem,bool>
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	bool operator( ) (const Stem& inLeft, 
 						const Stem& inRight ) const
 	{
@@ -69,9 +73,12 @@ typedef std::set<Stem,StemLess> StemSet;
 typedef std::set<size_t> SizeTSet;
 typedef std::map<Stem,size_t,StemLess> StemToSizeTMap;
 
-class Type1ToType2Converter : IType1InterpreterImplementation
+class PW_EXTERN Type1ToType2Converter : IType1InterpreterImplementation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	Type1ToType2Converter(void);
 	~Type1ToType2Converter(void);
 
@@ -111,6 +118,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	Type1Input* mHelper;
 	ConversionNodeList mConversionProgram;
 	bool mHintReplacementEncountered;

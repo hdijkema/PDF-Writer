@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReaderWithPosition.h"
@@ -30,9 +31,12 @@
 #endif
 
 
-class InputFileStream : public IByteReaderWithPosition
+class PW_EXTERN InputFileStream : public IByteReaderWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputFileStream(void);
 	virtual ~InputFileStream(void);
 
@@ -54,6 +58,9 @@ public:
 	LongFilePositionType GetFileSize();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	FILE* mStream;
 };

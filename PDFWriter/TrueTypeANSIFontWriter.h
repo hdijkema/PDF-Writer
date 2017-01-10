@@ -19,19 +19,23 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IANSIFontWriterHelper.h"
 #include "IFontDescriptorHelper.h"
 #include "ObjectsBasicTypes.h"
 
-class FreeTypeFaceWrapper;
+class PW_EXTERN FreeTypeFaceWrapper;
 struct WrittenFontRepresentation;
-class ObjectsContext;
+class PW_EXTERN ObjectsContext;
 
-class TrueTypeANSIFontWriter : public IANSIFontWriterHelper, IFontDescriptorHelper
+class PW_EXTERN TrueTypeANSIFontWriter : public IANSIFontWriterHelper, IFontDescriptorHelper
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	TrueTypeANSIFontWriter(void);
 	~TrueTypeANSIFontWriter(void);
 
@@ -54,6 +58,9 @@ public:
 										ObjectsContext* inObjectsContext);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	ObjectIDType mEmbeddedFontFileObjectID;
 };

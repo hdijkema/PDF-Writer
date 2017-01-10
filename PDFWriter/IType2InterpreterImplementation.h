@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "CharStringDefinitions.h"
 
-class IType2InterpreterImplementation
+class PW_EXTERN IType2InterpreterImplementation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual PDFHummus::EStatusCode ReadCharString(LongFilePositionType inCharStringStart,
 							   LongFilePositionType inCharStringEnd,
 							   Byte** outCharString) = 0;	
@@ -84,9 +88,12 @@ public:
 	
 };
 
-class Type2InterpreterImplementationAdapter : public IType2InterpreterImplementation
+class PW_EXTERN Type2InterpreterImplementationAdapter : public IType2InterpreterImplementation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual PDFHummus::EStatusCode ReadCharString(LongFilePositionType inCharStringStart,
 							   LongFilePositionType inCharStringEnd,
 							   Byte** outCharString){return PDFHummus::eFailure;}	

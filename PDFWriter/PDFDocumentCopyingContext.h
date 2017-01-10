@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
@@ -30,21 +31,24 @@
 
 
 
-class ObjectsContext;
-class PDFParser;
-class IPDFParserExtender;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFParser;
+class PW_EXTERN IPDFParserExtender;
 
 namespace PDFHummus
 {
-	class DocumentContext;
+	class PW_EXTERN DocumentContext;
 }
 
 using namespace PDFHummus;
 
 
-class PDFDocumentCopyingContext
+class PW_EXTERN PDFDocumentCopyingContext
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFDocumentCopyingContext();
 	~PDFDocumentCopyingContext(void);
 
@@ -133,6 +137,9 @@ public:
     
     
 private:
+#     ifdef _MSC_VER
+#         pragma warning(disable:4251)
+#     endif
 
 	PDFHummus::DocumentContext* mDocumentContext;
 	PDFDocumentHandler mDocumentHandler;

@@ -19,14 +19,15 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
 
 #include <list>
 #include <utility>
 
-class PDFFormXObject;
-class PDFPage;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN PDFPage;
 
 
 

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*	
 	Hey, initially this is not a full fledged PFM file reader.
 	i'm just reading the bare minimum to get some required type1 font
@@ -107,11 +108,14 @@ struct PFMExtendedFontMetrics
 	WORD KernTracks;
 };
 
-class IByteReaderWithPosition;
+class PW_EXTERN IByteReaderWithPosition;
 
-class PFMFileReader
+class PW_EXTERN PFMFileReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PFMFileReader(void);
 	~PFMFileReader(void);
 
@@ -124,6 +128,9 @@ public:
 	// as i said, read just what i need
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	IByteReaderWithPosition* mReaderStream;
 	PDFHummus::EStatusCode mInternalReadStatus;

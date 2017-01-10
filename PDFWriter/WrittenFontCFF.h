@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "AbstractWrittenFont.h"
 
 #include <utility>
@@ -30,9 +31,12 @@ typedef std::pair<unsigned char,unsigned char> UCharAndUChar;
 typedef std::list<UCharAndUChar> UCharAndUCharList;
 
 
-class WrittenFontCFF : public AbstractWrittenFont
+class PW_EXTERN WrittenFontCFF : public AbstractWrittenFont
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	WrittenFontCFF(ObjectsContext* inObjectsContext,bool inIsCID);
 	virtual ~WrittenFontCFF(void);
 
@@ -43,6 +47,9 @@ public:
 	virtual PDFHummus::EStatusCode ReadState(PDFParser* inStateReader,ObjectIDType inObjectID);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	virtual bool AddToANSIRepresentation(const GlyphUnicodeMappingList& inGlyphsList,
 										 UShortList& outEncodedCharacters);
 

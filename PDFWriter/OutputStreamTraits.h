@@ -19,18 +19,22 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IOBasicTypes.h"
 
-class IByteWriter;
-class IByteReader;
+class PW_EXTERN IByteWriter;
+class PW_EXTERN IByteReader;
 
 using namespace IOBasicTypes;
 
-class OutputStreamTraits
+class PW_EXTERN OutputStreamTraits
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutputStreamTraits(IByteWriter* inOutputStream);
 	~OutputStreamTraits(void);
 
@@ -39,6 +43,9 @@ public:
 	PDFHummus::EStatusCode CopyToOutputStream(IByteReader* inInputStream,LongBufferSizeType inLength);	
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	IByteWriter* mOutputStream;
 };

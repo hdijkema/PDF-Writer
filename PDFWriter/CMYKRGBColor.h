@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 // 256 values based color
 
-class CMYKRGBColor
+class PW_EXTERN CMYKRGBColor
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CMYKRGBColor(void);
 	CMYKRGBColor(unsigned char inR,unsigned char inG, unsigned char inB);
 	CMYKRGBColor(unsigned char inC,unsigned char inM, unsigned char inY, unsigned char inK);

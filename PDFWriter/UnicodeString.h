@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
@@ -32,9 +33,12 @@ typedef std::list<unsigned long> ULongList;
 typedef std::list<unsigned short> UShortList;
 typedef std::pair<PDFHummus::EStatusCode,UShortList> EStatusCodeAndUShortList;
 
-class UnicodeString
+class PW_EXTERN UnicodeString
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	UnicodeString(void);
 	UnicodeString(const UnicodeString& inOtherString);
 	UnicodeString(const ULongList& inOtherList);
@@ -75,5 +79,8 @@ public:
 	const ULongList& GetUnicodeList() const;
 	ULongList& GetUnicodeList();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	ULongList mUnicodeCharacters;
 };

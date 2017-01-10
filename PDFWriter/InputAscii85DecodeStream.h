@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReader.h"
 
-class InputAscii85DecodeStream : public IByteReader
+class PW_EXTERN InputAscii85DecodeStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputAscii85DecodeStream(void);
 	~InputAscii85DecodeStream(void);
 
@@ -44,6 +48,9 @@ public:
 	virtual bool NotEnded();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReader* mSourceStream;
 
 	bool mHitEnd;

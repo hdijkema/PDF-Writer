@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IOBasicTypes.h"
 
-class IReadPositionProvider
+class PW_EXTERN IReadPositionProvider
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	virtual ~IReadPositionProvider(){}
 

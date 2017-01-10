@@ -19,26 +19,44 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <string>
 
-class PDFUsedFont;
+class PW_EXTERN PDFUsedFont;
 
-class GraphicState
+class PW_EXTERN GraphicState
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	GraphicState(void);
 	GraphicState(const GraphicState& inGraphicState);
 	~GraphicState(void);
 
 	GraphicState& operator=(const GraphicState& inGraphicState);
 
-	// current font properties
+    PDFUsedFont *getFont();
+    void setFont(PDFUsedFont *f);
+
+    double getFontSize();
+    void setFontSize(double fs);
+
+    std::string getPlacedFontName();
+    void setPlacedFontName(std::string pfn);
+
+    double getPlacedFontSize();
+    void setPlacedFontSize(double pfs);
+
+
+private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
+    // current font properties
 	PDFUsedFont* mFont;
 	double mFontSize;
 	std::string mPlacedFontName;
 	double mPlacedFontSize;
-
-
-
 };

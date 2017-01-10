@@ -19,6 +19,7 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IOBasicTypes.h"
 #include "ObjectsBasicTypes.h"
@@ -30,8 +31,11 @@ typedef std::list<IOBasicTypes::Byte> ByteList;
 typedef std::list<ByteList> ByteListList;
 
 
-class XCryptionCommon {
+class PW_EXTERN XCryptionCommon {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	XCryptionCommon(void);
 	virtual ~XCryptionCommon(void);
@@ -129,6 +133,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	ByteList mPaddingFiller;
 	ByteListList mEncryptionKeysStack;
 	bool mUsingAES;

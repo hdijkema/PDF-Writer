@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	IndirectObjectsReferenceRegistry does two jobs:
 	1. It maintains the reference list for all indirect objects (initially just their total count), and allowing to get a new object number
@@ -33,8 +34,8 @@
 
 using namespace IOBasicTypes;
 
-class ObjectsContext;
-class PDFParser;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFParser;
 
 struct ObjectWriteInformation
 {
@@ -61,9 +62,12 @@ struct ObjectWriteInformation
 typedef std::pair<bool,ObjectWriteInformation> GetObjectWriteInformationResult;
 typedef std::vector<ObjectWriteInformation> ObjectWriteInformationVector;
 
-class IndirectObjectsReferenceRegistry
+class PW_EXTERN IndirectObjectsReferenceRegistry
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	IndirectObjectsReferenceRegistry(void);
 	~IndirectObjectsReferenceRegistry(void);
 
@@ -91,6 +95,9 @@ public:
     void SetupXrefFromModifiedFile(PDFParser* inModifiedFileParser);
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
 	ObjectWriteInformationVector mObjectsWritesRegistry;
     
     void SetupInitialFreeObject();

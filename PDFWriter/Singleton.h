@@ -19,20 +19,27 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #ifndef NULL
 #define NULL 0
 #endif
 
 template <class T> 
-class Singleton
+class PW_EXTERN Singleton
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	static T* GetInstance();
 	static void Reset();
 	// same as reset (trying to work with different versions usage here)
 	static void Release();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	Singleton();
 	static T* mInstance;
 };

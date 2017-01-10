@@ -19,6 +19,7 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #ifndef PDFHUMMUS_NO_DCT
 
@@ -26,9 +27,12 @@
 #include "IByteReader.h"
 #include "jpeglib.h"
 
-class InputDCTDecodeStream : public IByteReader
+class PW_EXTERN InputDCTDecodeStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     InputDCTDecodeStream();
     virtual ~InputDCTDecodeStream();
     
@@ -47,6 +51,9 @@ public:
 	virtual bool NotEnded();
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
     jpeg_decompress_struct mJPGState;
     jpeg_error_mgr mJPGError;
 

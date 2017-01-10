@@ -344,7 +344,7 @@ EStatusCode CFFEmbeddedFontWriter::WriteName(const std::string& inSubsetFontName
 {
 	// get the first name from the name table, and write it here
 
-	std::string fontName = inSubsetFontName.size() == 0 ? mOpenTypeInput.mCFF.mName.front() : inSubsetFontName;
+    std::string fontName = inSubsetFontName.size() == 0 ? mOpenTypeInput.mCFF.nameFront() : inSubsetFontName;
 
 	Byte sizeOfOffset = GetMostCompressedOffsetSize((unsigned long)fontName.size() + 1);
 

@@ -19,19 +19,23 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
-class PDFTiledPattern;
-class ObjectsContext;
+class PW_EXTERN PDFTiledPattern;
+class PW_EXTERN ObjectsContext;
 namespace PDFHummus
 {
-    class DocumentContext;  
+    class PW_EXTERN DocumentContext;  
 };
 
-class ITiledPatternEndWritingTask
+class PW_EXTERN ITiledPatternEndWritingTask
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~ITiledPatternEndWritingTask(){}
     
     virtual PDFHummus::EStatusCode Write(PDFTiledPattern* inTiledPattern,

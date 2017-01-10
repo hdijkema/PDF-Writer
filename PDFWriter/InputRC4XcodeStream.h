@@ -17,6 +17,7 @@
 	limitations under the License.
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReader.h"
@@ -26,9 +27,12 @@
 
 typedef std::list<IOBasicTypes::Byte> ByteList;
 
-class InputRC4XcodeStream : public IByteReader
+class PW_EXTERN InputRC4XcodeStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputRC4XcodeStream(void);
 	~InputRC4XcodeStream(void);
 
@@ -47,6 +51,9 @@ public:
 	virtual bool NotEnded();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReader *mSourceStream;
 	RC4 mRC4;
 };

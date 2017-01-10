@@ -71,6 +71,7 @@
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #ifndef PDFHUMMUS_NO_TIFF
 
@@ -87,17 +88,17 @@
 
 struct T2P;
 struct T2P_BOX;
-class DictionaryContext;
-class PDFImageXObject;
-class PDFStream;
-class PDFFormXObject;
-class ObjectsContext;
-class IDocumentContextExtender;
-class IByteReaderWithPosition;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN PDFImageXObject;
+class PW_EXTERN PDFStream;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN IDocumentContextExtender;
+class PW_EXTERN IByteReaderWithPosition;
 
 namespace PDFHummus
 {
-	class DocumentContext;
+	class PW_EXTERN DocumentContext;
 }
 
 using namespace PDFHummus;
@@ -165,9 +166,12 @@ typedef void* tdata_t;          /* image data ref */
 
 typedef	tsize_t (*ImageSizeProc)(T2P* inT2p);
 
-class TIFFImageHandler
+class PW_EXTERN TIFFImageHandler
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	struct TiffImageInfo
 	{
 		DoubleAndDoublePair dimensions;
@@ -202,6 +206,9 @@ public:
 	// get number of images in the tiff collection
 	unsigned long ReadImagePageCount(IByteReaderWithPosition* inTIFFStream);
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PDFHummus::DocumentContext* mContainerDocumentContext;
 	ObjectsContext* mObjectsContext;
 	T2P* mT2p; // state for tiff->pdf

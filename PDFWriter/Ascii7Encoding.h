@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <string>
 #include <utility>
@@ -27,9 +28,12 @@
 
 typedef std::pair<bool,std::string> BoolAndString;
 
-class Ascii7Encoding
+class PW_EXTERN Ascii7Encoding
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	Ascii7Encoding(void);
 	~Ascii7Encoding(void);
 

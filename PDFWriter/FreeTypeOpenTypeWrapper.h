@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IFreeTypeFaceExtender.h"
 
 #include <ft2build.h>
@@ -28,9 +29,12 @@
 typedef std::pair<bool,FT_UShort> BoolAndFTUShort;
 
 
-class FreeTypeOpenTypeWrapper : public IFreeTypeFaceExtender
+class PW_EXTERN FreeTypeOpenTypeWrapper : public IFreeTypeFaceExtender
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	FreeTypeOpenTypeWrapper(FT_Face inFace); // NEVER EVER EVER PASS NULL!!!!1
 	virtual ~FreeTypeOpenTypeWrapper(void);
 
@@ -50,6 +54,9 @@ public:
 	virtual std::string GetPostscriptNameNonStandard();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	TT_Postscript* mPostScriptTable;
 	TT_OS2* mOS2Table;
 	TT_PCLT* mPCLTTable;

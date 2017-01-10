@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "PDFObjectParser.h"
@@ -35,11 +36,11 @@
 #include <utility>
 
 
-class PDFArray;
-class PDFStreamInput;
-class PDFDictionary;
-class PDFName;
-class IPDFParserExtender;
+class PW_EXTERN PDFArray;
+class PW_EXTERN PDFStreamInput;
+class PW_EXTERN PDFDictionary;
+class PW_EXTERN PDFName;
+class PW_EXTERN IPDFParserExtender;
 
 typedef std::pair<PDFHummus::EStatusCode,IByteReader*> EStatusCodeAndIByteReader;
 
@@ -72,9 +73,12 @@ struct ObjectStreamHeaderEntry
 
 typedef std::map<ObjectIDType,ObjectStreamHeaderEntry*> ObjectIDTypeToObjectStreamHeaderEntryMap;
 
-class PDFParser
+class PW_EXTERN PDFParser
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFParser(void);
 	virtual ~PDFParser(void);
 
@@ -160,6 +164,9 @@ public:
     IByteReaderWithPosition* GetParserStream();
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
 	PDFObjectParser mObjectParser;
 	DecryptionHelper mDecryptionHelper;
 	IByteReaderWithPosition* mStream;

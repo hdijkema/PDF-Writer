@@ -3,16 +3,55 @@
 # Project created by QtCreator 2017-01-10T09:31:17
 #
 #-------------------------------------------------
+# This Qt prepared shared library compilation of PDFWriter
+# expects the following libraries and their include files in place:
+#
+# - zlib
+# - libjpeg
+# - libpng
+# - libtiff
+# - freetype2
+#
+# The LibAesgm code of PDFWriter is being used.
+#
+# You can compile the PDFWriter library using QtCreator.
+#
+# Installation:
+# -------------
+# Copy the resulting libraries to the place you want them; e.g.
+#
+# mac/unix
+#       <installdir>/lib
+#
+# windows
+#       <installdir>/win32/lib          Release
+#       <installdir>/x64/lib            Release
+#       <installdir>/win32/libd         Debug
+#       <installdir>/x64/libd           Debug
+#
+# Next, copy the needed headerfiles to
+#
+# max/unix/windows
+#       <installdir>/include/PDFWriter
+#
+# The headerfiles needed ara all .h files in the PDFWriter
+# directory and the LibAesgm directory.
+#-------------------------------------------------
+
+# Variables to set for the needed support libraries
+win32: MYLIBDIR = c:/devel/libraries
+mac: MYLIBDIR = /Users/hans/devel/libraries
 
 QT       -= core gui
 
 TARGET = libpdfwriter
 TEMPLATE = lib
 
-win32: MYLIBDIR = c:/devel/libraries
-mac: MYLIBDIR = /Users/hans/devel/libraries
+INCLUDEPATH += $$PWD/../../LibAesgm
 
 win32: INCLUDEPATH += $$MYLIBDIR/include
+win32: INCLUDEPATH += $$MYLIBDIR/include/freetype
+
 contains(QT_ARCH, i386) { # 32bit
     CONFIG(debug, debug|release) {
         win32: LIBS += -L$$MYLIBDIR/32bit/libd
@@ -26,7 +65,7 @@ contains(QT_ARCH, i386) { # 32bit
         win32: LIBS += -L$$MYLIBDIR/64bit/lib
     }
 }
-win32: LIBS += -lzlib -llibjpeg -llibpng -lfreetype271 -llibtiff -lGdi32 -lfreetype271
+win32: LIBS += -lzlib -llibjpeg -llibpng -lfreetype271 -llibtiff -lGdi32
 DEFINES += LIBPDFWRITER_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
@@ -183,7 +222,12 @@ SOURCES += \
     ../WrittenFontCFF.cpp \
     ../WrittenFontTrueType.cpp \
     ../XCryptionCommon.cpp \
-    ../XObjectContentContext.cpp
+    ../XObjectContentContext.cpp \
+    ../../LibAesgm/aes_modes.c \
+    ../../LibAesgm/aes_ni.c \
+    ../../LibAesgm/aescrypt.c \
+    ../../LibAesgm/aeskey.c \
+    ../../LibAesgm/aestab.c
 
 HEADERS +=\
     ../AbstractContentContext.h \
@@ -376,7 +420,15 @@ HEADERS +=\
     ../WrittenFontTrueType.h \
     ../XCryptionCommon.h \
     ../XObjectContentContext.h \
-    ../PDFWriterGlobal.h
+    ../PDFWriterGlobal.h \
+    ../../LibAesgm/aes.h \
+    ../../LibAesgm/aes_ni.h \
+    ../../LibAesgm/aes_via_ace.h \
+    ../../LibAesgm/aescpp.h \
+    ../../LibAesgm/aesopt.h \
+    ../../LibAesgm/aestab.h \
+    ../../LibAesgm/brg_endian.h \
+    ../../LibAesgm/brg_types.h
 
 unix {
     target.path = /usr/lib

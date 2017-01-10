@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	BoxingBase is a class for boxing primitives.
 
@@ -31,9 +32,12 @@
 
 
 template <typename T>
-class BoxingBase
+class PW_EXTERN BoxingBase
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	BoxingBase();
 	BoxingBase(const T& inValue);
 	BoxingBase(const BoxingBase<T>& inOther);
@@ -42,6 +46,7 @@ public:
 	BoxingBase<T>&  operator =(const T& inValue);
 
 protected:
+
 	T boxedValue;
 };
 
@@ -77,9 +82,12 @@ BoxingBase<T>::operator T() const
 }
 
 template <typename T>
-class STDStreamsReader
+class PW_EXTERN STDStreamsReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	void Read(const std::string& inReadFrom,T& outValue);
 	void Read(const std::wstring& inReadFrom,T& outValue);
 };
@@ -99,9 +107,12 @@ void STDStreamsReader<T>::Read(const std::wstring& inReadFrom,T& outValue)
 }
 
 template <typename T>
-class STDStreamsWriter
+class PW_EXTERN STDStreamsWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	void Write(const T& inValue,std::string& outWriteTo);
 	void Write(const T& inValue,std::wstring& outWriteTo);
 };
@@ -124,9 +135,12 @@ void STDStreamsWriter<T>::Write(const T& inValue,std::wstring& outWriteTo)
 
 
 template <typename U, class Reader=STDStreamsReader<U>, class Writer=STDStreamsWriter<U> >
-class BoxingBaseWithRW : public BoxingBase<U>
+class PW_EXTERN BoxingBaseWithRW : public BoxingBase<U>
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	BoxingBaseWithRW();
 	BoxingBaseWithRW(const U& inValue);
 	BoxingBaseWithRW(const BoxingBase<U>& inOther);

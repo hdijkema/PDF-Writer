@@ -19,6 +19,7 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
@@ -26,14 +27,17 @@
 
 
 
-class PDFPage;
-class IByteReaderWithPosition;
-class PDFDocumentCopyingContext;
-class PDFWriter;
+class PW_EXTERN PDFPage;
+class PW_EXTERN IByteReaderWithPosition;
+class PW_EXTERN PDFDocumentCopyingContext;
+class PW_EXTERN PDFWriter;
 
-class PDFPageMergingHelper
+class PW_EXTERN PDFPageMergingHelper
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
     PDFPageMergingHelper(PDFPage* inPage);
 	virtual ~PDFPageMergingHelper(void);
@@ -43,6 +47,9 @@ public:
     PDFHummus::EStatusCode MergePageContent(PDFWriter* inWriter,IByteReaderWithPosition* inPDFStream,unsigned long inPageIndex);
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
     
     PDFPage* mPage;
 };

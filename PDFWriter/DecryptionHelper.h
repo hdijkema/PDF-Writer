@@ -19,20 +19,27 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "XCryptionCommon.h"
 
 #include <string>
 
-class PDFParser;
-class IByteReader;
-class PDFStreamInput;
-class PDFObject;
+class PW_EXTERN PDFParser;
+class PW_EXTERN IByteReader;
+class PW_EXTERN PDFStreamInput;
+class PW_EXTERN PDFObject;
 
-class DecryptionHelper {
+class PW_EXTERN DecryptionHelper {
 
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	DecryptionHelper(void);
 	virtual ~DecryptionHelper(void);
 
@@ -76,6 +83,9 @@ public:
 	// Reset after or before usage
 	void Reset();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	XCryptionCommon mXcryption;
 
 	bool mIsEncrypted;

@@ -19,15 +19,19 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "IByteWriter.h"
 #include "DictOperand.h"
 
 using namespace IOBasicTypes;
 
-class CFFPrimitiveWriter
+class PW_EXTERN CFFPrimitiveWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CFFPrimitiveWriter(IByteWriter* inCFFOutput = NULL);
 	~CFFPrimitiveWriter(void);
 
@@ -59,6 +63,9 @@ public:
 	PDFHummus::EStatusCode PadNBytes(unsigned short inBytesToPad);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteWriter* mCFFOutput;
 	PDFHummus::EStatusCode mInternalState;
 	Byte mCurrentOffsize;

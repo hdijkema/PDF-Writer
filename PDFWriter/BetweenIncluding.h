@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 template <typename T>
 static bool betweenIncluding(T inTest,T inLowerBound,T inHigherBound)

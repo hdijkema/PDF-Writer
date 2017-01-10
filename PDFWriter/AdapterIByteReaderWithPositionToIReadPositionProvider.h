@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IReadPositionProvider.h"
 #include "IByteReaderWithPosition.h"
 
-class AdapterIByteReaderWithPositionToIReadPositionProvider : public IReadPositionProvider
+class PW_EXTERN AdapterIByteReaderWithPositionToIReadPositionProvider : public IReadPositionProvider
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	AdapterIByteReaderWithPositionToIReadPositionProvider(){mStream = NULL;}
 	AdapterIByteReaderWithPositionToIReadPositionProvider(IByteReaderWithPosition* inStream){mStream = inStream;}
 	
@@ -35,6 +39,9 @@ public:
 	virtual IOBasicTypes::LongFilePositionType GetCurrentPosition(){return mStream->GetCurrentPosition();};
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReaderWithPosition* mStream;
 	
 };

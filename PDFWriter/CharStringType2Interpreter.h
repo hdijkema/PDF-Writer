@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IType2InterpreterImplementation.h"
 #include "CharStringDefinitions.h"
@@ -29,9 +30,12 @@
 
 typedef std::vector<CharStringOperand> CharStringOperandVector;
 
-class CharStringType2Interpreter
+class PW_EXTERN CharStringType2Interpreter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CharStringType2Interpreter(void);
 	~CharStringType2Interpreter(void);
 
@@ -39,6 +43,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	CharStringOperandList mOperandStack;
 	unsigned short mStemsCount;
 	IType2InterpreterImplementation* mImplementationHelper;

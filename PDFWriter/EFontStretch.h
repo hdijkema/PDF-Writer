@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 //aligning index to be like the Open Type width class numbers, for direct mapping
 

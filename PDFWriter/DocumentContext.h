@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "EPDFVersion.h"
@@ -48,27 +49,27 @@ using namespace IOBasicTypes;
 
 typedef std::pair<ObjectIDType,bool> ObjectIDTypeAndBool;
 
-class DictionaryContext;
-class ObjectsContext;
-class PDFPage;
-class PageTree;
-class OutputFile;
-class IDocumentContextExtender;
-class PageContentContext;
-class ResourcesDictionary;
-class PDFFormXObject;
-class PDFTiledPattern;
-class PDFRectangle;
-class PDFImageXObject;
-class PDFUsedFont;
-class PageContentContext;
-class PDFParser;
-class PDFDictionary;
-class IResourceWritingTask;
-class IFormEndWritingTask;
-class PDFDocumentCopyingContext;
-class IPageEndWritingTask;
-class ITiledPatternEndWritingTask;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFPage;
+class PW_EXTERN PageTree;
+class PW_EXTERN OutputFile;
+class PW_EXTERN IDocumentContextExtender;
+class PW_EXTERN PageContentContext;
+class PW_EXTERN ResourcesDictionary;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN PDFTiledPattern;
+class PW_EXTERN PDFRectangle;
+class PW_EXTERN PDFImageXObject;
+class PW_EXTERN PDFUsedFont;
+class PW_EXTERN PageContentContext;
+class PW_EXTERN PDFParser;
+class PW_EXTERN PDFDictionary;
+class PW_EXTERN IResourceWritingTask;
+class PW_EXTERN IFormEndWritingTask;
+class PW_EXTERN PDFDocumentCopyingContext;
+class PW_EXTERN IPageEndWritingTask;
+class PW_EXTERN ITiledPatternEndWritingTask;
 
 typedef std::set<IDocumentContextExtender*> IDocumentContextExtenderSet;
 typedef std::pair<PDFHummus::EStatusCode,ObjectIDType> EStatusCodeAndObjectIDType;
@@ -103,9 +104,12 @@ namespace PDFHummus
 	typedef std::map<StringAndULongPair,HummusImageInformation> StringAndULongPairToHummusImageInformationMap;
 
 
-	class DocumentContext
+	class PW_EXTERN DocumentContext
 	{
 	public:
+#	ifdef _MSC_VER
+#	  pragma warning(default:4251)
+#	endif
 		DocumentContext();
 		~DocumentContext();
 
@@ -348,6 +352,9 @@ namespace PDFHummus
 		ObjectIDTypeSet& GetAnnotations();
 
 	private:
+#	ifdef _MSC_VER
+#	  pragma warning(disable:4251)
+#	endif
 		ObjectsContext* mObjectsContext;
 		TrailerInformation mTrailerInformation;
 		CatalogInformation mCatalogInformation;

@@ -20,17 +20,21 @@
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFWriter.h"
 #include "DictionaryContext.h"
 
-class PDFCosDict;
+class PW_EXTERN PDFCosDict;
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-class PDFCosArray
+class PW_EXTERN PDFCosArray
 
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     PDFCosArray(PDFWriter &parentDoc, std::string name = std::string()) : 
       m_Name(name), 
       m_DocumentContext(parentDoc.GetObjectsContext()),
@@ -114,6 +118,9 @@ public:
     ObjectIDType       ID() {return m_ObjID;}
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
     friend class PDFCosDict;
     bool               m_DidEnd;
     ObjectsContext&    m_DocumentContext;

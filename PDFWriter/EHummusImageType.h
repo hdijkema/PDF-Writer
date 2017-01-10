@@ -18,6 +18,7 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 namespace PDFHummus
 {

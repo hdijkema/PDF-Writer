@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "ObjectsBasicTypes.h"
 #include "PDFRectangle.h"
@@ -31,13 +32,16 @@
 typedef std::pair<bool,PDFRectangle> BoolAndPDFRectangle;
 typedef std::pair<bool,unsigned int> BoolAndUnsignedInt;
 
-class PageContentContext;
+class PW_EXTERN PageContentContext;
 
 typedef std::list<ObjectIDType> ObjectIDTypeList;
 
-class PDFPage
+class PW_EXTERN PDFPage
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFPage(void);
 	~PDFPage(void);
 
@@ -82,6 +86,9 @@ public:
 	void AssociateContentContext(PageContentContext* inContentContext);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PDFRectangle mMediaBox;
 	BoolAndUnsignedInt mRotate;
     BoolAndPDFRectangle mTrimBox;

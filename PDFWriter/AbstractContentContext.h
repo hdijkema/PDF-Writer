@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 /*
 	abstract implementation for content context.
@@ -46,15 +47,15 @@
 
 namespace PDFHummus
 {
-    class DocumentContext;  
+    class PW_EXTERN DocumentContext;  
 };
-class ObjectsContext;
-class PDFStream;
-class ResourcesDictionary;
-class PDFImageXObject;
-class ITextCommand;
-class IByteReader;
-class IContentContextListener;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFStream;
+class PW_EXTERN ResourcesDictionary;
+class PW_EXTERN PDFImageXObject;
+class PW_EXTERN ITextCommand;
+class PW_EXTERN IByteReader;
+class PW_EXTERN IContentContextListener;
 
 template <typename T>
 struct SomethingOrDouble
@@ -78,9 +79,12 @@ typedef std::set<IContentContextListener*> IContentContextListenerSet;
 typedef std::pair<double,double> DoubleAndDoublePair;
 typedef std::list<DoubleAndDoublePair> DoubleAndDoublePairList;
 
-class AbstractContentContext
+class PW_EXTERN AbstractContentContext
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	// graphic options struct for high level methods
 	enum EDrawingType
 	{
@@ -344,12 +348,16 @@ public:
 	PrimitiveObjectsWriter& GetPrimitiveWriter() {return mPrimitiveWriter;}
 protected:
 
+
 	PDFHummus::DocumentContext* mDocumentContext;
 
 	// Derived classes should use this method to update the stream for writing
 	void SetPDFStreamForWrite(PDFStream* inStream);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	// Derived classes should use this method to retrive the content resource dictionary, for updating procsets 'n such
 	virtual ResourcesDictionary* GetResourcesDictionary() = 0;
 	// Derived classes should optionally use this method if the stream needs updating (use calls to SetPDFStreamForWrite for this purpose)

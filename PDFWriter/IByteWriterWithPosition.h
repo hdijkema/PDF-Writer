@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	IByteWriterWithPosition.
 	extension of IByteWriter that also allows for retrieving the current position
@@ -27,9 +28,12 @@
 
 #include "IByteWriter.h"
 
-class IByteWriterWithPosition : public IByteWriter
+class PW_EXTERN IByteWriterWithPosition : public IByteWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IByteWriterWithPosition(void){};
 
 	virtual IOBasicTypes::LongFilePositionType GetCurrentPosition() = 0;

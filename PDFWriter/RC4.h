@@ -19,15 +19,19 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IOBasicTypes.h"
 #include <list>
 
 typedef std::list<IOBasicTypes::Byte> ByteList;
 
-class RC4
+class PW_EXTERN RC4
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	RC4();
 	RC4(const ByteList& inKey);
 	RC4(const IOBasicTypes::Byte* inKey,IOBasicTypes::LongBufferSizeType inLength);
@@ -41,6 +45,9 @@ public:
 	IOBasicTypes::Byte GetNextEncodingByte();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	IOBasicTypes::Byte mBuffer[256];
 	int mI;

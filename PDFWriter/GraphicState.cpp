@@ -49,3 +49,43 @@ GraphicState& GraphicState::operator=(const GraphicState& inGraphicState)
 	return *this;
 
 }
+
+PDFUsedFont *GraphicState::getFont()
+{
+    return mFont;
+}
+
+void GraphicState::setFont(PDFUsedFont *f)
+{
+    mFont = f;
+}
+
+double GraphicState::getFontSize()
+{
+    return mFontSize;
+}
+
+void GraphicState::setFontSize(double fs)
+{
+    mFontSize = fs;
+}
+
+std::string GraphicState::getPlacedFontName()
+{
+    return mPlacedFontName;
+}
+
+void GraphicState::setPlacedFontName(std::string pfn)
+{
+    mPlacedFontName = pfn;
+}
+
+double GraphicState::getPlacedFontSize()
+{
+    return mPlacedFontSize;
+}
+
+void GraphicState::setPlacedFontSize(double pfs)
+{
+    mPlacedFontSize = pfs;
+}

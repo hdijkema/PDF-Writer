@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <ctime>
 
-class Timer
+class PW_EXTERN Timer
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	Timer(void);
 	~Timer(void);
 
@@ -34,6 +38,9 @@ public:
 
 	double GetTotalMiliSeconds();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	clock_t mStartTime;
 	double mTotal;
 

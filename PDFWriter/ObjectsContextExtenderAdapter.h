@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IObjectsContextExtender.h"
 
-class ObjectsContextExtenderAdapter : public IObjectsContextExtender
+class PW_EXTERN ObjectsContextExtenderAdapter : public IObjectsContextExtender
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	virtual bool OverridesStreamCompression(){return false;}
 	
@@ -33,6 +37,7 @@ public:
 	virtual void FinalizeCompressedStreamWrite(IByteWriter* inCompressedStream){}
 
 protected:
+
 	ObjectsContextExtenderAdapter(){}
 
 };

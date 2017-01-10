@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "InputPFBDecodeStream.h"
 #include "IType1InterpreterImplementation.h"
@@ -108,11 +109,14 @@ typedef std::vector<Type1CharString> Type1CharStringVector;
 typedef std::map<std::string,Type1CharString> StringToType1CharStringMap;
 typedef std::map<std::string,Byte> StringToByteMap;
 
-class IByteReaderWithPosition;
+class PW_EXTERN IByteReaderWithPosition;
 
-class Type1Input : public Type1InterpreterImplementationAdapter
+class PW_EXTERN Type1Input : public Type1InterpreterImplementationAdapter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	Type1Input(void);
 	~Type1Input(void);
 
@@ -141,6 +145,9 @@ public:
 	virtual unsigned long GetLenIV();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	Type1Encoding mEncoding;
 	StringToByteMap mReverseEncoding;
 	long mSubrsCount;

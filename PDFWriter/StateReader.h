@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "InputFile.h"
@@ -29,9 +30,12 @@
 
 
 
-class StateReader
+class PW_EXTERN StateReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	StateReader(void);
 	~StateReader(void);
 
@@ -41,6 +45,9 @@ public:
 	void Finish();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	PDFParser mParser;
 	InputFile mInputFile;

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	IByteReaderWithPositionWithPosition. extension of byte reader with position setting and getting
 */
@@ -27,9 +28,12 @@
 
 using namespace IOBasicTypes;
 
-class IByteReaderWithPosition : public IByteReader
+class PW_EXTERN IByteReaderWithPosition : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IByteReaderWithPosition(void){};
 
 	/*

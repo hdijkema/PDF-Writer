@@ -19,19 +19,23 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include <string>
 
-class IByteWriterWithPosition;
-class OutputBufferedStream;
-class OutputFileStream;
+class PW_EXTERN IByteWriterWithPosition;
+class PW_EXTERN OutputBufferedStream;
+class PW_EXTERN OutputFileStream;
 
 
 
-class OutputFile
+class PW_EXTERN OutputFile
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutputFile(void);
 	~OutputFile(void);
 
@@ -41,6 +45,9 @@ public:
 	IByteWriterWithPosition* GetOutputStream(); // returns buffered output stream
 	const std::string& GetFilePath();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	std::string mFilePath;
 	OutputBufferedStream* mOutputStream;
 	OutputFileStream* mFileStream;

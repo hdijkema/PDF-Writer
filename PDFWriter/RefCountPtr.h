@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 /*
 	Smart pointer implementing automatic ref count addition/reduction
@@ -34,9 +35,12 @@
 
 
 template <typename T>
-class RefCountPtr
+class PW_EXTERN RefCountPtr
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	RefCountPtr();
 	// This one will not call AddRef (assume called from outside)
@@ -68,6 +72,9 @@ public:
 	bool operator!() const;
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	T* mValue;
 };
 

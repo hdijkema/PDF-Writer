@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "PDFObject.h"
 #include "ObjectsBasicTypes.h"
 
-class PDFIndirectObjectReference : public PDFObject
+class PW_EXTERN PDFIndirectObjectReference : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	enum EType
 	{

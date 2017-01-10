@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	In building the page tree i'm using a balanced tree sort of algorithm.
 	The tree lowest level is the only one holding actual pages ID. all levels above it are Page Tree containing Page Trees.
@@ -33,12 +34,15 @@
 
 #include "ObjectsBasicTypes.h"
 
-class PageTree;
-class IndirectObjectsReferenceRegistry;
+class PW_EXTERN PageTree;
+class PW_EXTERN IndirectObjectsReferenceRegistry;
 
-class CatalogInformation
+class PW_EXTERN CatalogInformation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CatalogInformation(void);
 	~CatalogInformation(void);
 
@@ -53,6 +57,9 @@ public:
 
 	void Reset();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	PageTree* mCurrentPageTreeNode;
 };

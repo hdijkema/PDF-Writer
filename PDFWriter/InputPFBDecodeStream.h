@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 /*
 	reads a PFB stream, decoding the eexec parts. A type 1 parser can use this stream to make the parsing
@@ -34,7 +35,7 @@
 
 using namespace IOBasicTypes;
 
-class InputPFBDecodeStream;
+class PW_EXTERN InputPFBDecodeStream;
 
 typedef PDFHummus::EStatusCode (*DecodeMethod)(
 	InputPFBDecodeStream* inThis,
@@ -43,9 +44,12 @@ typedef PDFHummus::EStatusCode (*DecodeMethod)(
 
 typedef std::pair<bool,std::string> BoolAndString;
 
-class InputPFBDecodeStream : public IByteReader
+class PW_EXTERN InputPFBDecodeStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputPFBDecodeStream(void);
 	~InputPFBDecodeStream(void);
 
@@ -75,6 +79,9 @@ public:
 	PDFHummus::EStatusCode ReadRegularByte(Byte& outByte);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReader* mStreamToDecode;
 	LongFilePositionType mInSegmentReadIndex;
 	LongFilePositionType mSegmentSize;

@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IOBasicTypes.h"
 
 
-class StandardEncoding
+class PW_EXTERN StandardEncoding
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	StandardEncoding(void);
 	~StandardEncoding(void);
 

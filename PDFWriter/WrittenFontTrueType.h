@@ -19,11 +19,15 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "AbstractWrittenFont.h"
 
-class WrittenFontTrueType : public AbstractWrittenFont
+class PW_EXTERN WrittenFontTrueType : public AbstractWrittenFont
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	WrittenFontTrueType(ObjectsContext* inObjectsContext);
 	~WrittenFontTrueType(void);
 
@@ -34,6 +38,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	virtual bool AddToANSIRepresentation(	const GlyphUnicodeMappingList& inGlyphsList,
 											UShortList& outEncodedCharacters);
 

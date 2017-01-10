@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReader.h"
@@ -26,9 +27,12 @@
 struct z_stream_s;
 typedef z_stream_s z_stream;
 
-class InputFlateDecodeStream : public IByteReader
+class PW_EXTERN InputFlateDecodeStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputFlateDecodeStream();
 
 	// Note that assigning passes ownership on the stream, use Assign(NULL) to remove ownership
@@ -47,6 +51,9 @@ public:
 	virtual bool NotEnded();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IOBasicTypes::Byte mBuffer;
 	IByteReader* mSourceStream;
 	z_stream* mZLibState;

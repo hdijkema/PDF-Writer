@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <stdarg.h>
 
@@ -30,12 +31,15 @@
 
 // good for tracing upto 5K wide chars messages
 
-class Log;
-class IByteWriter;
+class PW_EXTERN Log;
+class PW_EXTERN IByteWriter;
 
-class Trace
+class PW_EXTERN Trace
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	Trace();
 	~Trace(void);
 
@@ -48,6 +52,9 @@ public:
     static Trace& DefaultTrace();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	char mBuffer[5001];
 	Log* mLog;
 

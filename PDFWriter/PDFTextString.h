@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	Representing a PDF text string. In accordance with PDF specifications 1.7, section 3.8.1 of text string. 
 	encodes a double byte Unicode text to a PDF text string, 
@@ -36,9 +37,12 @@
 
 typedef std::pair<bool,IOBasicTypes::Byte> ConvertToPDFDocEncodingResult;
 
-class PDFTextString
+class PW_EXTERN PDFTextString
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	
 	PDFTextString();
 	PDFTextString(const std::string& inString); // initialize from an encoded string
@@ -60,6 +64,9 @@ public:
 	static const PDFTextString& Empty();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	std::string mTextString;
 

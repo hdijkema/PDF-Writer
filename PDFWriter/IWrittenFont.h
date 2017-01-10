@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
@@ -33,13 +34,16 @@ typedef std::list<unsigned short> UShortList;
 typedef std::list<UShortList> UShortListList;
 typedef std::list<GlyphUnicodeMappingList> GlyphUnicodeMappingListList;
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
-class PDFParser;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFParser;
 
-class IWrittenFont
+class PW_EXTERN IWrittenFont
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IWrittenFont(){}	
 
 	/*

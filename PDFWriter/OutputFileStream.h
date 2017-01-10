@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteWriterWithPosition.h"
@@ -31,9 +32,12 @@
 
 
 
-class OutputFileStream : public IByteWriterWithPosition
+class PW_EXTERN OutputFileStream : public IByteWriterWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutputFileStream(void);
 	virtual ~OutputFileStream(void);
 
@@ -51,6 +55,9 @@ public:
 	virtual IOBasicTypes::LongFilePositionType GetCurrentPosition();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	FILE* mStream;
 };

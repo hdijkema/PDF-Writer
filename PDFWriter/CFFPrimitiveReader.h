@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "IByteReaderWithPosition.h"
 #include "DictOperand.h"
 
-class CFFPrimitiveReader
+class PW_EXTERN CFFPrimitiveReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CFFPrimitiveReader(IByteReaderWithPosition* inCFFFile = NULL);
 	~CFFPrimitiveReader(void);
 
@@ -54,6 +58,9 @@ public:
 	PDFHummus::EStatusCode ReadDictOperand(Byte inFirstByte,DictOperand& outOperand);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReaderWithPosition* mCFFFile;
 	LongFilePositionType mInitialPosition;
 	PDFHummus::EStatusCode mInternalState;

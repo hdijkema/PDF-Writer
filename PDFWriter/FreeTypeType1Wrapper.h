@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IFreeTypeFaceExtender.h"
 #include "PFMFileReader.h"
 #include "Type1Input.h"
@@ -27,9 +28,12 @@
 #include FT_FREETYPE_H
 #include FT_TYPE1_TABLES_H 
 
-class FreeTypeType1Wrapper : public IFreeTypeFaceExtender
+class PW_EXTERN FreeTypeType1Wrapper : public IFreeTypeFaceExtender
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	FreeTypeType1Wrapper(FT_Face inFace,const std::string& inFontFilePath,const std::string& inPFMFilePath);  // NEVER EVER EVER PASS NULL!!!!1 [ok to pass empty string for PFM file]
 	virtual ~FreeTypeType1Wrapper(void);
 
@@ -49,6 +53,9 @@ public:
 	virtual std::string GetPostscriptNameNonStandard();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
     FT_Face mFace;
 	bool mPFMFileInfoRelevant;
 	PFMFileReader mPFMReader;

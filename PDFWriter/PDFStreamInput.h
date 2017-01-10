@@ -19,16 +19,20 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFObject.h"
 #include "IOBasicTypes.h"
 
-class PDFDictionary;
+class PW_EXTERN PDFDictionary;
 
 using namespace IOBasicTypes;
 
-class PDFStreamInput : public PDFObject
+class PW_EXTERN PDFStreamInput : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	enum EType
 	{
 		eType = ePDFObjectStream
@@ -43,6 +47,9 @@ public:
 	LongFilePositionType GetStreamContentStart();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PDFDictionary* mDictionary;
 	LongFilePositionType mStreamContentStart;
 };

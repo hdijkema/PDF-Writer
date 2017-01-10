@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	PDFStream objects represents a stream in the PDF.
 	due to @#$@$ Length key in stream dictionary, stream writing in the library is a two step matter.
@@ -37,14 +38,17 @@
 using namespace IOBasicTypes;
 
 
-class IByteWriterWithPosition;
-class IObjectsContextExtender;
-class DictionaryContext;
-class EncryptionHelper;
+class PW_EXTERN IByteWriterWithPosition;
+class PW_EXTERN IObjectsContextExtender;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN EncryptionHelper;
 
-class PDFStream
+class PW_EXTERN PDFStream
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFStream(
 		bool inCompressStream,
 		IByteWriterWithPosition* inOutputStream,
@@ -79,6 +83,9 @@ public:
     void FlushStreamContentForDirectExtentStream();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	bool mCompressStream;
 	OutputFlateEncodeStream mFlateEncodingStream;
 	IByteWriterWithPosition* mOutputStream;

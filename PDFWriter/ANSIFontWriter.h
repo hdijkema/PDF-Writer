@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
@@ -29,11 +30,11 @@
 #include <string>
 #include <list>
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
-class DictionaryContext;
-class IANSIFontWriterHelper;
-class IByteWriter;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN IANSIFontWriterHelper;
+class PW_EXTERN IByteWriter;
 
 
 
@@ -43,9 +44,12 @@ typedef std::list<UShortAndString> UShortAndStringList;
 typedef std::pair<unsigned int, GlyphEncodingInfo> UIntAndGlyphEncodingInfo;
 typedef std::vector<UIntAndGlyphEncodingInfo> UIntAndGlyphEncodingInfoVector;
 
-class ANSIFontWriter 
+class PW_EXTERN ANSIFontWriter 
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	ANSIFontWriter(void);
 	~ANSIFontWriter(void);
 
@@ -57,6 +61,9 @@ public:
 							const std::string& inWrittenFontName);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	void CalculateCharacterEncodingArray();
 	void WriteWidths(DictionaryContext* inFontContext);

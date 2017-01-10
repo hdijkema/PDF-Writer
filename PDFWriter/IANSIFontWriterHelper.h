@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
-class DictionaryContext;
-class IFontDescriptorHelper;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN IFontDescriptorHelper;
 
-class IANSIFontWriterHelper
+class PW_EXTERN IANSIFontWriterHelper
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IANSIFontWriterHelper(){}
 
 	// write the sub type value (only, key is already written at this point) for the particular font into the dictionary.

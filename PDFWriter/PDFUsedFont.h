@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "FreeTypeFaceWrapper.h"
 #include "ObjectsBasicTypes.h"
@@ -39,13 +40,16 @@ typedef std::list<std::string> StringList;
 typedef std::list<GlyphUnicodeMappingList> GlyphUnicodeMappingListList;
 typedef std::list<unsigned int> UIntList;
 
-class IWrittenFont;
-class ObjectsContext;
-class PDFParser;
+class PW_EXTERN IWrittenFont;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFParser;
 
-class PDFUsedFont
+class PW_EXTERN PDFUsedFont
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	struct TextMeasures
 	{
@@ -57,19 +61,26 @@ public:
 		double height;
 	};
 
-	class IOutlineEnumerator : private FreeTypeFaceWrapper::IOutlineEnumerator {
+	class PW_EXTERN IOutlineEnumerator : private FreeTypeFaceWrapper::IOutlineEnumerator {
 		friend class PDFUsedFont;
 	public:
+#	ifdef _MSC_VER
+#	  pragma warning(default:4251)
+#	endif
 		IOutlineEnumerator(double base_x, double base_y);
 		virtual ~IOutlineEnumerator(){};
 
 	protected:
+
 		virtual bool Moveto(double x, double y)=0;
 		virtual bool Lineto(double x, double y)=0;
 		virtual bool Curveto(double x1, double y1, double x2, double y2, double x3, double y3)=0;
 		virtual bool Closepath()=0;
 
 	private:
+#	ifdef _MSC_VER
+#	  pragma warning(disable:4251)
+#	endif
 		void BeginEnum(double scale);
 		void MoveBasepoint(double dx, double dy);
 
@@ -131,9 +142,13 @@ public:
 	bool EnumeratePaths(IOutlineEnumerator& target, const UIntList& inGlyphsList,double inFontSize=1);
 
 protected:
+
 	void GetUnicodeGlyphs(const std::string& inText, UIntList& glyphs);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	static const unsigned int AdvanceCacheLimit = 200;
 	FreeTypeFaceWrapper mFaceWrapper;
     IWrittenFont* mWrittenFont;

@@ -19,17 +19,21 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 /*
     listener for content context events. right now we're just having a save/restore notification
     so you can implement your graphic stack implementation
  */
 
-class AbstractContentContext;
+class PW_EXTERN AbstractContentContext;
 
-class IContentContextListener
+class PW_EXTERN IContentContextListener
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     virtual ~IContentContextListener(){}
     
     virtual void OnQ(AbstractContentContext* inContext) = 0;

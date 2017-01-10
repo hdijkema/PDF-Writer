@@ -19,19 +19,23 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "IType1InterpreterImplementation.h"
 #include "PrimitiveObjectsWriter.h"
 #include <string>
 
-class Type1Input;
-class IByteWriter;
+class PW_EXTERN Type1Input;
+class PW_EXTERN IByteWriter;
 
 
 
-class CharStringType1Tracer: public IType1InterpreterImplementation
+class PW_EXTERN CharStringType1Tracer: public IType1InterpreterImplementation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CharStringType1Tracer(void);
 	~CharStringType1Tracer(void);
 
@@ -69,6 +73,9 @@ public:
 	virtual unsigned long GetLenIV();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteWriter* mWriter;
 	Type1Input* mHelper;
 	PrimitiveObjectsWriter mPrimitiveWriter;

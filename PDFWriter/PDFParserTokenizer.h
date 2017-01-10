@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IOBasicTypes.h"
 #include "EStatusCode.h"
@@ -28,14 +29,17 @@
 
 
 
-class IByteReader;
+class PW_EXTERN IByteReader;
 
 typedef std::pair<bool,std::string> BoolAndString;
 
 
-class PDFParserTokenizer
+class PW_EXTERN PDFParserTokenizer
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFParserTokenizer(void);
 	~PDFParserTokenizer(void);
 
@@ -73,6 +77,9 @@ public:
 	// to get the "virtual" position from the tokenizer point of view.
 	IOBasicTypes::LongFilePositionType GetReadBufferSize();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	IByteReader* mStream;
 	bool mHasTokenBuffer;

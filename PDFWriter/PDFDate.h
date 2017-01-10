@@ -19,14 +19,18 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <string>
 
 
 
-class PDFDate
+class PW_EXTERN PDFDate
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	// enumerator describing the relation to UTC
 	enum EUTCRelation
 	{

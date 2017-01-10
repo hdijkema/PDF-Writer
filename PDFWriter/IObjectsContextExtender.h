@@ -19,14 +19,21 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
-class IByteWriter;
-class IByteWriterWithPosition;
+class PW_EXTERN IByteWriter;
+class PW_EXTERN IByteWriterWithPosition;
 
-class IObjectsContextExtender
+class PW_EXTERN IObjectsContextExtender
 {
 
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IObjectsContextExtender(){}
 
 	// PDFStream object compression extensibility

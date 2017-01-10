@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
@@ -33,17 +34,20 @@
 #include <vector>
 #include <set>
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
 
 
 
 typedef std::vector<unsigned int> UIntVector;
 typedef std::set<unsigned int> UIntSet;
 
-class TrueTypeEmbeddedFontWriter
+class PW_EXTERN TrueTypeEmbeddedFontWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	TrueTypeEmbeddedFontWriter(void);
 	~TrueTypeEmbeddedFontWriter(void);
 
@@ -53,6 +57,9 @@ public:
 									ObjectIDType& outEmbeddedFontObjectID);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	OpenTypeFileInput mTrueTypeInput;
 	InputFile mTrueTypeFile;
 	OutputStringBufferStream mFontFileStream;

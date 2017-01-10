@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "JPEGImageInformation.h"
 #include "ObjectsBasicTypes.h"
@@ -30,15 +31,15 @@
 
 
 
-class ObjectsContext;
-class PDFImageXObject;
-class IDocumentContextExtender;
-class PDFFormXObject;
-class IByteReaderWithPosition;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFImageXObject;
+class PW_EXTERN IDocumentContextExtender;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN IByteReaderWithPosition;
 
 namespace PDFHummus
 {
-	class DocumentContext;
+	class PW_EXTERN DocumentContext;
 }
 
 using namespace PDFHummus;
@@ -50,9 +51,12 @@ typedef std::pair<double,double> DoubleAndDoublePair;
 typedef std::set<IDocumentContextExtender*> IDocumentContextExtenderSet;
 
 
-class JPEGImageHandler
+class PW_EXTERN JPEGImageHandler
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	JPEGImageHandler();
 	~JPEGImageHandler(void);
 
@@ -83,6 +87,9 @@ public:
 	int GetColorComponents(const JPEGImageInformation& inJPGImageInformation);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	JPEGImageInformation mNullInformation;
 	StringToJPEGImageInformationMap mImagesInformationMap;
 	ObjectsContext* mObjectsContext;

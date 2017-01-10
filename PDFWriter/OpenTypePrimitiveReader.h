@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReaderWithPosition.h"
 
-class OpenTypePrimitiveReader
+class PW_EXTERN OpenTypePrimitiveReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OpenTypePrimitiveReader(IByteReaderWithPosition* inTrueTypeFile = NULL);
 	~OpenTypePrimitiveReader(void);
 
@@ -47,6 +51,9 @@ public:
 
 	IByteReaderWithPosition* GetReadStream();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	IByteReaderWithPosition* mOpenTypeFile;
 	LongFilePositionType mInitialPosition;

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	IByteReader. interface for reading bytes
 
@@ -28,9 +29,12 @@
 #include "IOBasicTypes.h"
 
 
-class IByteReader 
+class PW_EXTERN IByteReader 
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IByteReader(void){};
 
 	/*

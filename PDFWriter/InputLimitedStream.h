@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IByteReader.h"
 
-class InputLimitedStream : public IByteReader
+class PW_EXTERN InputLimitedStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputLimitedStream();
 	virtual ~InputLimitedStream(void);
 
@@ -38,6 +42,9 @@ public:
 	virtual bool NotEnded();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	bool mOwnsStream;
 	IByteReader* mStream;

@@ -1176,7 +1176,12 @@ EStatusCode CFFFileInput::Type2Endchar(const CharStringOperandList& inOperandLis
 			return PDFHummus::eFailure;
 	}
 
-	return PDFHummus::eSuccess;
+    return PDFHummus::eSuccess;
+}
+
+std::string CFFFileInput::nameFront()
+{
+    return mName.front();
 }
 
 CharString* CFFFileInput::GetCharacterFromStandardEncoding(Byte inCharacterCode)

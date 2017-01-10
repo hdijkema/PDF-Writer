@@ -19,19 +19,23 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IWrittenFont.h"
 #include "WrittenFontRepresentation.h"
 #include "GlyphUnicodeMapping.h"
 
-class ObjectsContext;
-class DictionaryContext;
-class PDFDictionary;
-class PDFParser;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN PDFDictionary;
+class PW_EXTERN PDFParser;
 
-class AbstractWrittenFont : public IWrittenFont
+class PW_EXTERN AbstractWrittenFont : public IWrittenFont
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	AbstractWrittenFont(ObjectsContext* inObjectsContext);
 	virtual ~AbstractWrittenFont(void);
 
@@ -44,6 +48,7 @@ public:
 							  bool& outEncodingIsMultiByte,
 							  ObjectIDType &outFontObjectID);
 protected:
+
 	WrittenFontRepresentation* mCIDRepresentation;
 	WrittenFontRepresentation* mANSIRepresentation;
 	ObjectsContext* mObjectsContext;
@@ -53,6 +58,9 @@ protected:
 	PDFHummus::EStatusCode ReadStateFromObject(PDFParser* inStateReader,PDFDictionary* inState);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	ObjectIDType mCidRepresentationObjectStateID;
 	ObjectIDType mAnsiRepresentationObjectStateID;
 

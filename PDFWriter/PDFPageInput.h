@@ -19,6 +19,7 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 /*
     High level object for retrieving Page related info from a parsed page.
@@ -38,13 +39,16 @@
 
 
 
-class PDFObject;
-class PDFParser;
-class PDFArray;
+class PW_EXTERN PDFObject;
+class PW_EXTERN PDFParser;
+class PW_EXTERN PDFArray;
 
-class PDFPageInput
+class PW_EXTERN PDFPageInput
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     
     // simple constructor, not calling addref on inPageObject
     PDFPageInput(PDFParser* inParser,PDFObject* inPageObject);
@@ -66,6 +70,9 @@ public:
     PDFRectangle GetArtBox();
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
     PDFParser* mParser;
     PDFObjectCastPtr<PDFDictionary> mPageObject;
     

@@ -19,6 +19,7 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IByteWriterWithPosition.h"
 #include "RC4.h"
 
@@ -27,9 +28,12 @@ limitations under the License.
 typedef std::list<IOBasicTypes::Byte> ByteList;
 
 
-class OutputRC4XcodeStream : public IByteWriterWithPosition
+class PW_EXTERN OutputRC4XcodeStream : public IByteWriterWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutputRC4XcodeStream(void);
 	virtual ~OutputRC4XcodeStream(void);
 
@@ -39,6 +43,9 @@ public:
 	virtual IOBasicTypes::LongFilePositionType GetCurrentPosition();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	bool mOwnsStream;
 	IByteWriterWithPosition* mTargetStream;
 	RC4 mRC4;

@@ -19,17 +19,21 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IType2InterpreterImplementation.h"
 #include "PrimitiveObjectsWriter.h"
 
-class CFFFileInput;
-class IByteWriter;
+class PW_EXTERN CFFFileInput;
+class PW_EXTERN IByteWriter;
 
-class CharStringType2Tracer : public IType2InterpreterImplementation
+class PW_EXTERN CharStringType2Tracer : public IType2InterpreterImplementation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CharStringType2Tracer(void);
 	~CharStringType2Tracer(void);
 
@@ -89,6 +93,9 @@ public:
 	virtual CharString* GetGlobalSubr(long inSubrIndex);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteWriter* mWriter;
 	CFFFileInput* mHelper;
 	PrimitiveObjectsWriter mPrimitiveWriter;

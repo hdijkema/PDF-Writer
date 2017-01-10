@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "Timer.h"
 
@@ -29,9 +30,12 @@
 
 typedef std::map<std::string,Timer> StringToTimerMap;
 
-class TimersRegistry
+class PW_EXTERN TimersRegistry
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	TimersRegistry(void);
 	~TimersRegistry(void);
 
@@ -47,5 +51,8 @@ public:
 	void TraceAndReleaseAll();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	StringToTimerMap mTimers;
 };

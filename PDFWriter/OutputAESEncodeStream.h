@@ -19,6 +19,7 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IByteWriterWithPosition.h"
 #include "aescpp.h"
 
@@ -27,9 +28,12 @@ limitations under the License.
 typedef std::list<IOBasicTypes::Byte> ByteList;
 
 
-class OutputAESEncodeStream : public IByteWriterWithPosition
+class PW_EXTERN OutputAESEncodeStream : public IByteWriterWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutputAESEncodeStream(void);
 	virtual ~OutputAESEncodeStream(void);
 
@@ -39,6 +43,9 @@ public:
 	virtual IOBasicTypes::LongFilePositionType GetCurrentPosition();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	bool mOwnsStream;
 	IByteWriterWithPosition* mTargetStream;
 

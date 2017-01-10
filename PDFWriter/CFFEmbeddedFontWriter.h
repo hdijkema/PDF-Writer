@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
@@ -43,12 +44,15 @@ typedef std::vector<unsigned short> UShortVector;
 typedef std::map<FontDictInfo*,Byte> FontDictInfoToByteMap;
 
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
 
-class CFFEmbeddedFontWriter
+class PW_EXTERN CFFEmbeddedFontWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CFFEmbeddedFontWriter(void);
 	~CFFEmbeddedFontWriter(void);
 
@@ -74,6 +78,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	OpenTypeFileInput mOpenTypeInput;
 	InputFile mOpenTypeFile;
 	CFFPrimitiveWriter mPrimitivesWriter;

@@ -758,8 +758,8 @@ void AbstractContentContext::TfLow(const std::string& inFontName,double inFontSi
 	mPrimitiveWriter.WriteDouble(inFontSize);
 	mPrimitiveWriter.WriteKeyword("Tf");
 
-	mGraphicStack.GetCurrentState().mPlacedFontName = inFontName;
-	mGraphicStack.GetCurrentState().mPlacedFontSize = inFontSize;
+    mGraphicStack.GetCurrentState().setPlacedFontName(inFontName);
+    mGraphicStack.GetCurrentState().setPlacedFontSize(inFontSize);
 }
 
 void AbstractContentContext::Tr(int inRenderingMode)
@@ -959,8 +959,8 @@ void AbstractContentContext::TJHexLow(const StringOrDoubleList& inStringsAndSpac
 
 void AbstractContentContext::Tf(PDFUsedFont* inFontReference,double inFontSize)
 {
-	mGraphicStack.GetCurrentState().mFont = inFontReference;
-	mGraphicStack.GetCurrentState().mFontSize = inFontSize;
+    mGraphicStack.GetCurrentState().setFont(inFontReference);
+    mGraphicStack.GetCurrentState().setFontSize(inFontSize);
 }
 
 class ITextCommand
@@ -973,7 +973,7 @@ public:
 
 EStatusCode AbstractContentContext::WriteTextCommandWithEncoding(const std::string& inUnicodeText,ITextCommand* inTextCommand)
 {
-	PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().mFont;
+    PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().getFont();
 	if(!currentFont)
 	{
 		TRACE_LOG("AbstractContentContext::WriteTextCommandWithEncoding, Cannot write text, no current font is defined");
@@ -1048,7 +1048,7 @@ EStatusCode AbstractContentContext::DoubleQuote(double inWordSpacing, double inC
 
 EStatusCode AbstractContentContext::TJ(const StringOrDoubleList& inStringsAndSpacing)
 {
-	PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().mFont;
+    PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().getFont();
 	if(!currentFont)
 	{
 		TRACE_LOG("AbstractContentContext::TJ, Cannot write text, no current font is defined");
@@ -1088,7 +1088,7 @@ EStatusCode AbstractContentContext::Tj(const GlyphUnicodeMappingList& inText)
 
 EStatusCode AbstractContentContext::WriteTextCommandWithDirectGlyphSelection(const GlyphUnicodeMappingList& inText,ITextCommand* inTextCommand)
 {
-	PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().mFont;
+    PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().getFont();
 	if(!currentFont)
 	{
 		TRACE_LOG("AbstractContentContext::WriteTextCommandWithDirectGlyphSelection, Cannot write text, no current font is defined");
@@ -1112,9 +1112,9 @@ EStatusCode AbstractContentContext::WriteTextCommandWithDirectGlyphSelection(con
 	// Write the font reference (only if required)
 	std::string fontName = GetResourcesDictionary()->AddFontMapping(fontObjectID);
 
-	if(mGraphicStack.GetCurrentState().mPlacedFontName != fontName ||
-		mGraphicStack.GetCurrentState().mPlacedFontSize != mGraphicStack.GetCurrentState().mFontSize)
-		TfLow(fontName,mGraphicStack.GetCurrentState().mFontSize);
+    if(mGraphicStack.GetCurrentState().getPlacedFontName() != fontName ||
+        mGraphicStack.GetCurrentState().getPlacedFontSize() != mGraphicStack.GetCurrentState().getFontSize())
+        TfLow(fontName,mGraphicStack.GetCurrentState().getFontSize());
 	
 	// Now write the string using the text command
 	OutputStringBufferStream stringStream;
@@ -1159,7 +1159,7 @@ EStatusCode AbstractContentContext::DoubleQuote(double inWordSpacing, double inC
 
 EStatusCode AbstractContentContext::TJ(const GlyphUnicodeMappingListOrDoubleList& inStringsAndSpacing)
 {
-	PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().mFont;
+    PDFUsedFont* currentFont = mGraphicStack.GetCurrentState().getFont();
 	if(!currentFont)
 	{
 		TRACE_LOG("AbstractContentContext::TJ, Cannot write text, no current font is defined");
@@ -1199,9 +1199,9 @@ EStatusCode AbstractContentContext::TJ(const GlyphUnicodeMappingListOrDoubleList
 	// Write the font reference (only if required)
 	std::string fontName = GetResourcesDictionary()->AddFontMapping(fontObjectID);
 
-	if(mGraphicStack.GetCurrentState().mPlacedFontName != fontName ||
-		mGraphicStack.GetCurrentState().mPlacedFontSize != mGraphicStack.GetCurrentState().mFontSize)
-		TfLow(fontName,mGraphicStack.GetCurrentState().mFontSize);
+    if(mGraphicStack.GetCurrentState().getPlacedFontName() != fontName ||
+        mGraphicStack.GetCurrentState().getPlacedFontSize() != mGraphicStack.GetCurrentState().getFontSize())
+        TfLow(fontName,mGraphicStack.GetCurrentState().getFontSize());
 	
 	// Now write the string using the text command
 	OutputStringBufferStream stringStream;

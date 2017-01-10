@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "ContainerIterator.h"
 
 /*
@@ -36,9 +37,12 @@
 */
 
 template <class T>
-class MapIterator : public ContainerIterator<T>
+class PW_EXTERN MapIterator : public ContainerIterator<T>
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	MapIterator(T& inMap);
 	MapIterator(const MapIterator<T>& inOtherIterator);

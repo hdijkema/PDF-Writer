@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "ObjectsBasicTypes.h"
 #include "JPEGImageInformation.h"
 
@@ -27,9 +28,12 @@
 
 typedef std::list<std::string> StringList;
 
-class PDFImageXObject
+class PW_EXTERN PDFImageXObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFImageXObject(ObjectIDType inImageObjectID);
 	PDFImageXObject(ObjectIDType inImageObjectID,const std::string& inRequiredProcsetResourceName);
 	~PDFImageXObject(void);
@@ -40,6 +44,9 @@ public:
 	void AddRequiredProcset(const std::string& inRequiredProcsetResourceName);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	ObjectIDType mImageObjectID;
 	StringList mRequiredProcsetResourceNames;

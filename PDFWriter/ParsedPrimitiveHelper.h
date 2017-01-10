@@ -20,6 +20,7 @@
  */
 
 #pragma once
+#include "PDFWriterGlobal.h"
 
 /*
  Helper object for reading primitives. pass it to constructor and you can now use it to read primitives easily.
@@ -30,12 +31,15 @@
 
 
 
-class PDFObject;
+class PW_EXTERN PDFObject;
 
 
-class ParsedPrimitiveHelper
+class PW_EXTERN ParsedPrimitiveHelper
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     ParsedPrimitiveHelper(PDFObject* inObject);
     ~ParsedPrimitiveHelper();
     
@@ -48,6 +52,9 @@ public:
     std::string ToString();
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
     
     PDFObject* mWrappedObject;
 };

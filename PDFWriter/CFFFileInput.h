@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReaderWithPosition.h"
@@ -152,9 +153,12 @@ typedef std::vector<EncodingsInfo*> EncodingsInfoVector;
 
 
 
-class StringLess : public std::binary_function<const char*,const char*,bool>
+class PW_EXTERN StringLess : public std::binary_function<const char*,const char*,bool>
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	bool operator( ) (const char* left, 
 						const char* right ) const
 	{
@@ -173,9 +177,12 @@ struct CharString2Dependencies
 
 typedef std::map<const char*,unsigned short,StringLess> CharPToUShortMap;
 
-class CFFFileInput : public Type2InterpreterImplementationAdapter
+class PW_EXTERN CFFFileInput : public Type2InterpreterImplementationAdapter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CFFFileInput(void);
 	~CFFFileInput(void);
 
@@ -225,6 +232,7 @@ public:
 	virtual PDFHummus::EStatusCode Type2Endchar(const CharStringOperandList& inOperandList);
 
 
+    std::string  nameFront();
 	// publicly available constructs
 	
 	// mCFFOffset should be added to any position here when referring to the beginning if the file containing this
@@ -233,7 +241,6 @@ public:
 
 	CFFHeader mHeader;
 	unsigned short mFontsCount;
-	StringList mName;
 	TopDictInfo* mTopDictIndex; // count is same as fonts count
 	char** mStrings;
 	unsigned short mStringsCount;
@@ -242,6 +249,11 @@ public:
 	PrivateDictInfo* mPrivateDicts; // private dicts are the same as fonts count. refers to the topdict related private dics, not to the FontDicts scenarios in CID.
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
+    StringList mName;
+
 	CharStrings mGlobalSubrs;
 	CharStrings* mCharStrings; // count is same as fonts count
 	LongFilePositionTypeToCharStringsMap mLocalSubrs; // count is NOT the same as fonts count [some may be shared, plus there might be more because of CID usage]

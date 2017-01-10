@@ -19,10 +19,14 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
-class RefCountObject
+class PW_EXTERN RefCountObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	RefCountObject(void); // Constructor automatically initiates the first Ref Count
 	virtual ~RefCountObject(void);
 
@@ -30,6 +34,9 @@ public:
 	void Release();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	unsigned long mRefCount;
 };

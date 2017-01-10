@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "PDFObject.h"
 
-class PDFBoolean : public PDFObject
+class PW_EXTERN PDFBoolean : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	enum EType
 	{
@@ -39,5 +43,8 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	bool mValue;
 };

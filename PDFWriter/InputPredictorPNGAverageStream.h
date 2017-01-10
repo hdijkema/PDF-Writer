@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IByteReader.h"
 
-class InputPredictorPNGAverageStream : public IByteReader
+class PW_EXTERN InputPredictorPNGAverageStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputPredictorPNGAverageStream(void);
 	// Takes ownership (use Assign(NULL,0) to unassign)
 	InputPredictorPNGAverageStream(IByteReader* inSourceStream,IOBasicTypes::LongBufferSizeType inColumns);
@@ -38,6 +42,9 @@ public:
 	void Assign(IByteReader* inSourceStream,IOBasicTypes::LongBufferSizeType inColumns);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReader* mSourceStream;
 	IOBasicTypes::Byte* mBuffer;
 	IOBasicTypes::LongBufferSizeType mBufferSize;

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "ObjectsBasicTypes.h"
 #include "WrittenFontRepresentation.h"
@@ -32,13 +33,16 @@
 typedef std::pair<unsigned int, GlyphEncodingInfo> UIntAndGlyphEncodingInfo;
 typedef std::vector<UIntAndGlyphEncodingInfo> UIntAndGlyphEncodingInfoVector;
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
-class IFontDescriptorHelper;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN IFontDescriptorHelper;
 
-class FontDescriptorWriter
+class PW_EXTERN FontDescriptorWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	FontDescriptorWriter(void);
 	~FontDescriptorWriter(void);
 
@@ -50,6 +54,9 @@ public:
 								IFontDescriptorHelper* inDescriptorHelper);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	unsigned int CalculateFlags(FreeTypeFaceWrapper* inFontInfo,
 								const UIntAndGlyphEncodingInfoVector& inEncodedGlyphs);
 	bool IsSymbolic(FreeTypeFaceWrapper* inFontInfo,

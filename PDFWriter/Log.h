@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IOBasicTypes.h"
 #include "OutputFile.h"
@@ -28,15 +29,18 @@
 
 using namespace IOBasicTypes;
 
-class Log;
+class PW_EXTERN Log;
 
 typedef void (*LogFileMethod)(Log* inThis,const Byte* inMessage, LongBufferSizeType inMessageSize);
 
-class IByteWriter;
+class PW_EXTERN IByteWriter;
 
-class Log
+class PW_EXTERN Log
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	// log writes are in UTF8. so i'm asking here if you want a bom
 	Log(const std::string& inLogFilePath,bool inPlaceUTF8Bom);
@@ -52,6 +56,9 @@ public:
 	void LogEntryToStream(const Byte* inMessage, LongBufferSizeType inMessageSize);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	std::string mFilePath;
 	OutputFile mLogFile;

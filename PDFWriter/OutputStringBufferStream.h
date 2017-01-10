@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IByteWriterWithPosition.h"
 #include "MyStringBuf.h"
@@ -26,9 +27,12 @@
 
 
 
-class OutputStringBufferStream : public IByteWriterWithPosition
+class PW_EXTERN OutputStringBufferStream : public IByteWriterWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutputStringBufferStream(void);
 	~OutputStringBufferStream(void);
 
@@ -50,6 +54,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	MyStringBuf* mBuffer;
 	bool mOwnsBuffer;
 

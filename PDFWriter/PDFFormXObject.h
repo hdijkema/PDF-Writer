@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "ObjectsBasicTypes.h"
 #include "ResourcesDictionary.h"
@@ -26,16 +27,19 @@
 
 namespace PDFHummus
 {
-	class DocumentContext;
+	class PW_EXTERN DocumentContext;
 };
 
-class PDFStream;
-class XObjectContentContext;
-class ObjectsContext;
+class PW_EXTERN PDFStream;
+class PW_EXTERN XObjectContentContext;
+class PW_EXTERN ObjectsContext;
 
-class PDFFormXObject
+class PW_EXTERN PDFFormXObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	PDFFormXObject(PDFHummus::DocumentContext* inDocumentContext,ObjectIDType inFormXObjectID,PDFStream* inXObjectStream,ObjectIDType inFormXObjectResourcesDictionaryID);
 	~PDFFormXObject(void);
@@ -49,6 +53,9 @@ public:
 
 	
 private:
+#ifdef _MSC_VER
+#	pragma warning(disable:4251)
+#endif
 
 	ObjectIDType mXObjectID;
 	ObjectIDType mResourcesDictionaryID;

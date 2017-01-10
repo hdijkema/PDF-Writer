@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	IByteWriter. interface for writing bytes
 
@@ -26,9 +27,12 @@
 */
 #include "IOBasicTypes.h"
 
-class IByteWriter
+class PW_EXTERN IByteWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IByteWriter(void){};
 
 	/*

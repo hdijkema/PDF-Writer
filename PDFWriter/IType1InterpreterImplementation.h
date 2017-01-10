@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IOBasicTypes.h"
@@ -36,9 +37,12 @@ struct Type1CharString
 
 typedef std::list<long> LongList;
 
-class IType1InterpreterImplementation
+class PW_EXTERN IType1InterpreterImplementation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	virtual PDFHummus::EStatusCode Type1Hstem(const LongList& inOperandList) = 0;
 	virtual PDFHummus::EStatusCode Type1Vstem(const LongList& inOperandList) = 0;
@@ -71,9 +75,12 @@ public:
 
 };
 
-class Type1InterpreterImplementationAdapter : public IType1InterpreterImplementation
+class PW_EXTERN Type1InterpreterImplementationAdapter : public IType1InterpreterImplementation
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	virtual PDFHummus::EStatusCode Type1Hstem(const LongList& inOperandList) {return PDFHummus::eSuccess;}
 	virtual PDFHummus::EStatusCode Type1Vstem(const LongList& inOperandList) {return PDFHummus::eSuccess;}

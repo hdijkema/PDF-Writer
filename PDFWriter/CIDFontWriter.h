@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "WrittenFontRepresentation.h"
@@ -27,20 +28,23 @@
 #include <utility>
 #include <vector>
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
-class DictionaryContext;
-class IDescendentFontWriter;
-class IByteWriter;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN IDescendentFontWriter;
+class PW_EXTERN IByteWriter;
 
 
 
 typedef std::pair<unsigned int, GlyphEncodingInfo> UIntAndGlyphEncodingInfo;
 typedef std::vector<UIntAndGlyphEncodingInfo> UIntAndGlyphEncodingInfoVector;
 
-class CIDFontWriter
+class PW_EXTERN CIDFontWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CIDFontWriter(void);
 	virtual ~CIDFontWriter(void);
 
@@ -51,6 +55,9 @@ public:
 							bool inEmbedFont);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	FreeTypeFaceWrapper* mFontInfo;
 	WrittenFontRepresentation* mFontOccurrence;

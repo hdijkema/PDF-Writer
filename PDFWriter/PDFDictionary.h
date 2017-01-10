@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFObject.h"
 #include "PDFName.h"
 #include "MapIterator.h"
@@ -27,9 +28,12 @@
 
 
 
-class PDFNameLess : public std::binary_function<const PDFName*,const PDFName*,bool>
+class PW_EXTERN PDFNameLess : public std::binary_function<const PDFName*,const PDFName*,bool>
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	bool operator( ) (const PDFName* left, 
 						const PDFName* right ) const
 	{
@@ -39,9 +43,12 @@ public:
 
 typedef std::map<PDFName*,PDFObject*,PDFNameLess> PDFNameToPDFObjectMap;
 
-class PDFDictionary : public PDFObject
+class PW_EXTERN PDFDictionary : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	enum EType
 	{
@@ -60,6 +67,9 @@ public:
 	MapIterator<PDFNameToPDFObjectMap> GetIterator();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	PDFNameToPDFObjectMap mValues;
 };

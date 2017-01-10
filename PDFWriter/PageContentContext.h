@@ -19,16 +19,20 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "AbstractContentContext.h"
 
-class PDFPage;
-class ObjectsContext;
-class PDFStream;
+class PW_EXTERN PDFPage;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFStream;
 
-class PageContentContext : public AbstractContentContext
+class PW_EXTERN PageContentContext : public AbstractContentContext
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PageContentContext(PDFHummus::DocumentContext* inDocumentContext,PDFPage* inPageOfContext,ObjectsContext* inObjectsContext);
 	virtual ~PageContentContext(void);
 
@@ -45,6 +49,9 @@ public:
 	PDFPage* GetAssociatedPage();
     
 private:
+#    ifdef _MSC_VER
+#      pragma warning(disable:4251)
+#    endif
 	PDFPage* mPageOfContext;
 	ObjectsContext* mObjectsContext;
 	PDFStream* mCurrentStream;

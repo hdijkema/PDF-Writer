@@ -19,12 +19,16 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IByteReaderWithPosition.h"
 
-class InputByteArrayStream : public IByteReaderWithPosition
+class PW_EXTERN InputByteArrayStream : public IByteReaderWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputByteArrayStream();
 	InputByteArrayStream(IOBasicTypes::Byte* inByteArray,LongFilePositionType inArrayLength);
 	~InputByteArrayStream(void);
@@ -40,6 +44,9 @@ public:
 	virtual LongFilePositionType GetCurrentPosition();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	IOBasicTypes::Byte* mByteArray;
 	LongFilePositionType mArrayLength;

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "WrittenFontRepresentation.h"
 #include "ObjectsBasicTypes.h"
@@ -31,18 +32,21 @@
 #include <list>
 #include <string>
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
-class DictionaryContext;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN DictionaryContext;
 
 
 
 
 typedef std::list<FT_Pos> FTPosList;
 
-class DescendentFontWriter : public IFontDescriptorHelper
+class PW_EXTERN DescendentFontWriter : public IFontDescriptorHelper
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	DescendentFontWriter(void);
 	~DescendentFontWriter(void);
 
@@ -62,6 +66,9 @@ public:
 	virtual void WriteFontFileReference(DictionaryContext* inDescriptorContext,
 										ObjectsContext* inObjectsContext);
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	FreeTypeFaceWrapper* mFontInfo;
 	ObjectsContext* mObjectsContext;

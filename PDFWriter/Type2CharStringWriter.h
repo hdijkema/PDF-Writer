@@ -19,16 +19,20 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "IOBasicTypes.h"
 
 using namespace IOBasicTypes;
 
-class IByteWriter;
+class PW_EXTERN IByteWriter;
 
-class Type2CharStringWriter
+class PW_EXTERN Type2CharStringWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	Type2CharStringWriter(IByteWriter* inTargetStream);
 	~Type2CharStringWriter(void);
 
@@ -40,6 +44,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	IByteWriter* mTargetStream;
 

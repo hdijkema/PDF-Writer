@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IByteReader.h"
 #include "EStatusCode.h"
  
@@ -26,9 +27,12 @@
 using namespace IOBasicTypes;
 
 
-class InputCharStringDecodeStream : public IByteReader
+class PW_EXTERN InputCharStringDecodeStream : public IByteReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputCharStringDecodeStream(IByteReader* inReadFrom,unsigned long inLenIV=4);
 	~InputCharStringDecodeStream(void);
 
@@ -40,6 +44,9 @@ public:
 	virtual bool NotEnded();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReader* mReadFrom;
 	unsigned short mRandomizer;
 

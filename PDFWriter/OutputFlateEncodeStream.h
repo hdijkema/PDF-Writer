@@ -19,14 +19,18 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IByteWriterWithPosition.h"
 
 struct z_stream_s;
 typedef z_stream_s z_stream;
 
-class OutputFlateEncodeStream : public IByteWriterWithPosition
+class PW_EXTERN OutputFlateEncodeStream : public IByteWriterWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutputFlateEncodeStream(void);
 	virtual ~OutputFlateEncodeStream(void);
 
@@ -43,6 +47,9 @@ public:
 	void TurnOffEncoding();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IOBasicTypes::Byte* mBuffer;
 	IByteWriterWithPosition* mTargetStream;
 	bool mCurrentlyEncoding;

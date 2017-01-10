@@ -19,14 +19,18 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IByteReaderWithPosition.h"
 
 #include <string>
 
-class InputStringStream : public IByteReaderWithPosition
+class PW_EXTERN InputStringStream : public IByteReaderWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputStringStream();
 	InputStringStream(const std::string& inString);
 	~InputStringStream(void);
@@ -42,6 +46,9 @@ public:
 	virtual LongFilePositionType GetCurrentPosition();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	std::string::const_iterator mStartPosition;
 	std::string::const_iterator mEndPosition;

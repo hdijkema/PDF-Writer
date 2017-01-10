@@ -19,13 +19,17 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <string>
 
 
-class UppercaseSequance
+class PW_EXTERN UppercaseSequance
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	UppercaseSequance(void);
 	~UppercaseSequance(void);
 
@@ -41,6 +45,9 @@ public:
 	// reset to beginning value
 	void Reset();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	std::string mSequanceString;
 
 };

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "PDFTextString.h"
 #include "PDFDate.h"
@@ -35,9 +36,12 @@ enum EInfoTrapped
 	EInfoTrappedUnknown
 };
 
-class InfoDictionary
+class PW_EXTERN InfoDictionary
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InfoDictionary(void);
 	~InfoDictionary(void);
 
@@ -64,6 +68,9 @@ public:
 
 	void Reset();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	StringToPDFTextString mAdditionalInfoEntries;
 };

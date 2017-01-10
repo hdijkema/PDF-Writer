@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IByteReader.h"
 #include "IReadPositionProvider.h"
@@ -28,9 +29,12 @@
 	but sometimes you just want to skip. It does skip by recording the amount already read. then, if possible, reads to the skipped to position
 */
 
-class InputStreamSkipperStream : public IByteReader, public IReadPositionProvider
+class PW_EXTERN InputStreamSkipperStream : public IByteReader, public IReadPositionProvider
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputStreamSkipperStream();
 
 	// gets ownership, so if you wanna untie it, make sure to call Assign(NULL), before finishing
@@ -62,6 +66,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteReader* mStream;
 	IOBasicTypes::LongFilePositionType mAmountRead;
 };

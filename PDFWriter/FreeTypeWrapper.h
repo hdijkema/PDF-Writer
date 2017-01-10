@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
@@ -34,9 +35,12 @@
 typedef std::list<FT_Stream> FTStreamList;
 typedef std::map<FT_Face,FTStreamList> FTFaceToFTStreamListMap;
 
-class FreeTypeWrapper
+class PW_EXTERN FreeTypeWrapper
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	FreeTypeWrapper(void);
 	~FreeTypeWrapper(void);
 
@@ -48,6 +52,9 @@ public:
 	operator FT_Library() const;
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	FT_Library mFreeType;
 	FTFaceToFTStreamListMap mOpenStreams;

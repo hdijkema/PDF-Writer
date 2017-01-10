@@ -19,17 +19,21 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IOBasicTypes.h"
 
 using namespace IOBasicTypes;
 
-class OutputStringBufferStream;
+class PW_EXTERN OutputStringBufferStream;
 
-class TrueTypePrimitiveWriter
+class PW_EXTERN TrueTypePrimitiveWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	TrueTypePrimitiveWriter(OutputStringBufferStream* inTrueTypeFile = NULL);
 	~TrueTypePrimitiveWriter(void);
 
@@ -46,6 +50,9 @@ public:
 	PDFHummus::EStatusCode PadTo4();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	OutputStringBufferStream* mTrueTypeFile;
 	PDFHummus::EStatusCode mInternalState;
 

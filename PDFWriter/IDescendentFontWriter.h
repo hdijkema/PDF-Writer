@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
 #include "WrittenFontRepresentation.h"
@@ -27,18 +28,21 @@
 #include <vector>
 #include <utility>
 
-class FreeTypeFaceWrapper;
-class ObjectsContext;
-class DictionaryContext;
+class PW_EXTERN FreeTypeFaceWrapper;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN DictionaryContext;
 
 
 
 typedef std::pair<unsigned int, GlyphEncodingInfo> UIntAndGlyphEncodingInfo;
 typedef std::vector<UIntAndGlyphEncodingInfo> UIntAndGlyphEncodingInfoVector;
 
-class IDescendentFontWriter
+class PW_EXTERN IDescendentFontWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual ~IDescendentFontWriter(){};
 
 	virtual PDFHummus::EStatusCode WriteFont(	ObjectIDType inDecendentObjectID, 

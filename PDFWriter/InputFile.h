@@ -19,19 +19,23 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IByteReaderWithPosition.h"
 #include <string>
 
-class InputBufferedStream;
-class InputFileStream;
+class PW_EXTERN InputBufferedStream;
+class PW_EXTERN InputFileStream;
 
 
 
-class InputFile
+class PW_EXTERN InputFile
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputFile(void);
 	~InputFile(void);
 
@@ -44,6 +48,9 @@ public:
 	LongFilePositionType GetFileSize();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	std::string mFilePath;
 	InputBufferedStream* mInputStream;
 	InputFileStream* mFileStream;

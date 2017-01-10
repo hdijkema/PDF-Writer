@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "ObjectsBasicTypes.h"
 #include "ResourcesDictionary.h"
@@ -26,16 +27,19 @@
 
 namespace PDFHummus
 {
-	class DocumentContext;
+	class PW_EXTERN DocumentContext;
 };
 
-class PDFStream;
-class TiledPatternContentContext;
-class ObjectsContext;
+class PW_EXTERN PDFStream;
+class PW_EXTERN TiledPatternContentContext;
+class PW_EXTERN ObjectsContext;
 
-class PDFTiledPattern
+class PW_EXTERN PDFTiledPattern
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	PDFTiledPattern(PDFHummus::DocumentContext* inDocumentContext,ObjectIDType inObjectID,PDFStream* inStream,ObjectIDType inResourcesDictionaryID);
 	~PDFTiledPattern(void);
@@ -49,6 +53,9 @@ public:
 
 	
 private:
+#ifdef _MSC_VER
+#	pragma warning(disable:4251)
+#endif
 
 	ObjectIDType mObjectID;
 	ObjectIDType mResourcesDictionaryID;

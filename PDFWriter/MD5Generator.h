@@ -64,6 +64,7 @@
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "IOBasicTypes.h"
@@ -73,9 +74,12 @@
 
 typedef std::list<IOBasicTypes::Byte> ByteList;
 
-class MD5Generator
+class PW_EXTERN MD5Generator
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	MD5Generator(void);
 	~MD5Generator(void);
 
@@ -88,6 +92,9 @@ public:
 	const std::string& ToHexString();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	typedef unsigned       int uint4; 
 	typedef unsigned short int uint2; 

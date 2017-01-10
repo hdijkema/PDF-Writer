@@ -24,21 +24,25 @@
 #include <vector>
 #include <string>
 
-class AbstractContentContext;
-class PDFWriter;
-class PDFFormXObject;
-class PDFDictionary;
-class PDFDocumentCopyingContext;
-class ObjectsContext;
-class ResourcesDictionary;
-class PDFParser;
+class PW_EXTERN AbstractContentContext;
+class PW_EXTERN PDFWriter;
+class PW_EXTERN PDFFormXObject;
+class PW_EXTERN PDFDictionary;
+class PW_EXTERN PDFDocumentCopyingContext;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN ResourcesDictionary;
+class PW_EXTERN PDFParser;
 
 typedef std::vector<PDFFormXObject*> PDFFormXObjectVector;
 
 #pragma once
-class PDFModifiedPage
+#include "PDFWriterGlobal.h"
+class PW_EXTERN PDFModifiedPage
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFModifiedPage(PDFWriter* inWriter,unsigned long inPageIndex,bool inEnsureContentEncapsulation = false);
 	~PDFModifiedPage(void);
 
@@ -57,6 +61,9 @@ public:
 	ResourcesDictionary* GetCurrentResourcesDictionary();
 	PDFFormXObject* GetCurrentFormContext();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	PDFWriter* mWriter;
 	unsigned long mPageIndex;

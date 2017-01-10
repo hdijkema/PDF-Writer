@@ -19,19 +19,23 @@
  
  */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 
-class PDFPage;
-class ObjectsContext;
+class PW_EXTERN PDFPage;
+class PW_EXTERN ObjectsContext;
 namespace PDFHummus
 {
-    class DocumentContext;
+    class PW_EXTERN DocumentContext;
 };
 
-class IPageEndWritingTask
+class PW_EXTERN IPageEndWritingTask
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     virtual ~IPageEndWritingTask(){}
     
     virtual PDFHummus::EStatusCode Write(PDFPage* inPageObject,

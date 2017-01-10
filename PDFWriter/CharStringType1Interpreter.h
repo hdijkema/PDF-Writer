@@ -19,19 +19,26 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "IType1InterpreterImplementation.h"
 #include "EStatusCode.h"
 #include "InputCharStringDecodeStream.h"
 
-class CharStringType1Interpreter
+class PW_EXTERN CharStringType1Interpreter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	CharStringType1Interpreter(void);
 	~CharStringType1Interpreter(void);
 
 	PDFHummus::EStatusCode Intepret(const Type1CharString& inCharStringToIntepret, IType1InterpreterImplementation* inImplementationHelper);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	LongList mOperandStack;
 	IType1InterpreterImplementation* mImplementationHelper;

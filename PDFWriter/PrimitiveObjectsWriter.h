@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "ETokenSeparator.h"
 #include <string.h>
@@ -26,11 +27,14 @@
 
 
 
-class IByteWriter;
+class PW_EXTERN IByteWriter;
 
-class PrimitiveObjectsWriter
+class PW_EXTERN PrimitiveObjectsWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PrimitiveObjectsWriter(IByteWriter* inStreamForWriting = NULL);
 	~PrimitiveObjectsWriter(void);
 
@@ -57,6 +61,9 @@ public:
     IByteWriter* GetWritingStream();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	IByteWriter* mStreamForWriting;
 
 	size_t DetermineDoubleTrimmedLength(const std::string& inString);

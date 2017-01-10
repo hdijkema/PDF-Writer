@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 /*
 	see comment in Catalog Information for details on the algorithm to build the page tree
 */
@@ -26,13 +27,16 @@
 
 #include "ObjectsBasicTypes.h"
 
-class IndirectObjectsReferenceRegistry;
+class PW_EXTERN IndirectObjectsReferenceRegistry;
 
 #define PAGE_TREE_LEVEL_SIZE 10
 
-class PageTree
+class PW_EXTERN PageTree
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PageTree(ObjectIDType inObjectID);
 	PageTree(IndirectObjectsReferenceRegistry& inObjectsRegistry);
 	~PageTree(void);
@@ -55,6 +59,9 @@ public:
 	void SetParent(PageTree* inParent);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PageTree* mParent;
 	ObjectIDType mPageTreeID;
 	bool mIsLeafParent;

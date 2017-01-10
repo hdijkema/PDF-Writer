@@ -12,7 +12,9 @@
 #endif
 
 #ifdef _MSC_VER
-#pragma warning(disable:4100)
+#  pragma warning(disable:4100)
+#else
+
 #endif
 
 #endif // PDFWRITERGLOBAL_H

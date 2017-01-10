@@ -19,11 +19,15 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFObject.h"
 
-class PDFNull : public PDFObject
+class PW_EXTERN PDFNull : public PDFObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	enum EType
 	{
 		eType = ePDFObjectNull

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "PDFParserTokenizer.h"
 #include "EStatusCode.h"
@@ -29,19 +30,22 @@
 #include <string>
 #include <utility>
 
-class PDFObject;
-class IByteReader;
-class IPDFParserExtender;
-class DecryptionHelper;
+class PW_EXTERN PDFObject;
+class PW_EXTERN IByteReader;
+class PW_EXTERN IPDFParserExtender;
+class PW_EXTERN DecryptionHelper;
 
 
 
 typedef std::pair<bool,IOBasicTypes::Byte> BoolAndByte;
 typedef std::list<std::string> StringList;
 
-class PDFObjectParser
+class PW_EXTERN PDFObjectParser
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFObjectParser(void);
 	~PDFObjectParser(void);
 
@@ -65,6 +69,9 @@ public:
 	std::string DecodeHexString(const std::string inStringToDecode);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PDFParserTokenizer mTokenizer;
 	StringList mTokenBuffer;
 	IByteReader* mStream;

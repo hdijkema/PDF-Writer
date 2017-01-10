@@ -27,19 +27,23 @@
 */
 
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "PDFWriter.h"
 #include "PDFObjectCast.h"
 #include "PDFLiteralString.h"
 #include "PDFIndirectObjectReference.h"
 #include "PDFStreamInput.h"
 
-class PDFArrayIterator;
+class PW_EXTERN PDFArrayIterator;
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-class PDFDictionaryIterator
+class PW_EXTERN PDFDictionaryIterator
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     PDFDictionaryIterator(PDFParser &parser) :  mDictonary(NULL),mParser(parser)
     {
     }
@@ -66,6 +70,9 @@ public:
     bool WriteStreamToFile(InputFile &pdfFile, std::string s, std::string filePath);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
     void SetDictRefPtr(PDFDictionary  *dictonary)
     {
         mDictonary = dictonary; 

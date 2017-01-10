@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "PDFEmbedParameterTypes.h"
 #include "PDFParser.h"
@@ -34,24 +35,24 @@
 #include <list>
 #include <set>
 
-class ObjectsContext;
-class IByteWriter;
-class PDFDictionary;
-class PDFArray;
-class PDFStreamInput;
-class DictionaryContext;
-class PageContentContext;
-class PDFPage;
-class IDocumentContextExtender;
-class IPageEmbedInFormCommand;
-class IPDFParserExtender;
-class ICategoryServicesCommand;
-class PDFIndirectObjectReference;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN IByteWriter;
+class PW_EXTERN PDFDictionary;
+class PW_EXTERN PDFArray;
+class PW_EXTERN PDFStreamInput;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN PageContentContext;
+class PW_EXTERN PDFPage;
+class PW_EXTERN IDocumentContextExtender;
+class PW_EXTERN IPageEmbedInFormCommand;
+class PW_EXTERN IPDFParserExtender;
+class PW_EXTERN ICategoryServicesCommand;
+class PW_EXTERN PDFIndirectObjectReference;
 
 
 namespace PDFHummus
 {
-	class DocumentContext;
+	class PW_EXTERN DocumentContext;
 }
 
 using namespace PDFHummus;
@@ -72,43 +73,64 @@ struct ResourceTokenMarker
 	LongFilePositionType ResourceTokenPosition;
 };
 
-class IObjectWritePolicy
+class PW_EXTERN IObjectWritePolicy
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	virtual void WriteReference(PDFIndirectObjectReference* inReference, ETokenSeparator inSeparator) = 0;
 };
 
-class PDFDocumentHandler;
+class PW_EXTERN PDFDocumentHandler;
 
-class InWritingPolicy : public IObjectWritePolicy {
+class PW_EXTERN InWritingPolicy : public IObjectWritePolicy {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InWritingPolicy(PDFDocumentHandler* inDocumentHandler) {
 		mDocumentHandler = inDocumentHandler;
 	}
 	virtual void WriteReference(PDFIndirectObjectReference* inReference, ETokenSeparator inSeparator);
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PDFDocumentHandler* mDocumentHandler;
 };
 
-class OutWritingPolicy : public IObjectWritePolicy {
+class PW_EXTERN OutWritingPolicy : public IObjectWritePolicy {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	OutWritingPolicy(PDFDocumentHandler* inDocumentHandler, ObjectIDTypeList& ioSourceObjectsToAdd):mSourceObjectsToAdd(ioSourceObjectsToAdd){
 		mDocumentHandler = inDocumentHandler;
 	}
 	virtual void WriteReference(PDFIndirectObjectReference* inReference, ETokenSeparator inSeparator);
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	PDFDocumentHandler* mDocumentHandler;
 	ObjectIDTypeList& mSourceObjectsToAdd;
 };
 
 typedef std::list<ResourceTokenMarker> ResourceTokenMarkerList;
 
-class PDFDocumentHandler : public DocumentContextExtenderAdapter
+class PW_EXTERN PDFDocumentHandler : public DocumentContextExtenderAdapter
 {
 	friend class InWritingPolicy;
 	friend class OutWritingPolicy;
 
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFDocumentHandler(void);
 	virtual ~PDFDocumentHandler(void);
 
@@ -219,6 +241,9 @@ public:
 	// Extendibility
 	void SetParserExtender(IPDFParserExtender* inParserExtender);
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	ObjectsContext* mObjectsContext;
 	PDFHummus::DocumentContext* mDocumentContext;

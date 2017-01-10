@@ -19,20 +19,27 @@ limitations under the License.
 
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "XCryptionCommon.h"
 
 #include <string>
 
-class IByteWriterWithPosition;
-class ObjectsContext;
-class DecryptionHelper;
-class PDFParser;
+class PW_EXTERN IByteWriterWithPosition;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN DecryptionHelper;
+class PW_EXTERN PDFParser;
 
-class EncryptionHelper {
+class PW_EXTERN EncryptionHelper {
 
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	EncryptionHelper(void);
 	virtual ~EncryptionHelper(void);
 
@@ -99,6 +106,9 @@ public:
 	PDFHummus::EStatusCode ReadState(PDFParser* inStateReader, ObjectIDType inObjectID);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	XCryptionCommon mXcryption;
 
 	bool mIsDocumentEncrypted;

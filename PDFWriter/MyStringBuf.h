@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <sstream>
 
@@ -27,6 +28,9 @@
 class MyStringBuf : public std::stringbuf
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	std::stringbuf::pos_type GetCurrentReadPosition() {return gptr()-eback();}
 	std::stringbuf::pos_type GetCurrentWritePosition() {return pptr()-pbase();}

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
@@ -29,18 +30,21 @@
 
 
 
-class FreeTypeWrapper;
-class PDFUsedFont;
-class ObjectsContext;
-class PDFParser;
+class PW_EXTERN FreeTypeWrapper;
+class PW_EXTERN PDFUsedFont;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN PDFParser;
 
 typedef std::pair<std::string,long> StringAndLong;
 typedef std::map<StringAndLong,PDFUsedFont*> StringAndLongToPDFUsedFontMap;
 typedef std::map<std::string,std::string> StringToStringMap;
 
-class UsedFontsRepository
+class PW_EXTERN UsedFontsRepository
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	UsedFontsRepository(void);
 	~UsedFontsRepository(void);
 
@@ -58,6 +62,9 @@ public:
 	void Reset();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	ObjectsContext* mObjectsContext;
 	FreeTypeWrapper* mInputFontsInformation;

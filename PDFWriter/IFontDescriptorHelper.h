@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "WrittenFontRepresentation.h"
 
@@ -27,17 +28,20 @@
 
 
 
-class DictionaryContext;
-class ObjectsContext;
-class FreeTypeFaceWrapper;
+class PW_EXTERN DictionaryContext;
+class PW_EXTERN ObjectsContext;
+class PW_EXTERN FreeTypeFaceWrapper;
 
 typedef std::pair<unsigned int, GlyphEncodingInfo> UIntAndGlyphEncodingInfo;
 typedef std::vector<UIntAndGlyphEncodingInfo> UIntAndGlyphEncodingInfoVector;
 typedef std::vector<unsigned int> UIntVector;
 
-class IFontDescriptorHelper
+class PW_EXTERN IFontDescriptorHelper
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	virtual void WriteCharSet(	DictionaryContext* inDescriptorContext,
 								ObjectsContext* inObjectsContext,

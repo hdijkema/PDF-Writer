@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "RefCountObject.h"
 
@@ -27,9 +28,12 @@
 
 typedef std::map<std::string, void*> StringToVoidP;
 
-class PDFObject : public RefCountObject
+class PW_EXTERN PDFObject : public RefCountObject
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
     
     enum EPDFObjectType
     {
@@ -66,6 +70,9 @@ public:
 
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	EPDFObjectType mType;
 	StringToVoidP mMetadata;
 };

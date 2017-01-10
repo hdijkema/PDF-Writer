@@ -19,19 +19,26 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "BoxingBase.h"
 
-class PSBoolReader
+class PW_EXTERN PSBoolReader
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	void Read(const std::string& inReadFrom,bool& outValue);
 	void Read(const std::wstring& inReadFrom,bool& outValue);
 };
 
-class PSBoolWriter
+class PW_EXTERN PSBoolWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	void Write(const bool& inValue,std::string& outWriteTo);
 	void Write(const bool& inValue,std::wstring& outWriteTo);
 };

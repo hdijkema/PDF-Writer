@@ -1,16 +1,20 @@
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include <string>
 
-class IByteReader;
-class PDFName;
-class PDFDictionary;
-class PDFStreamInput;
+class PW_EXTERN IByteReader;
+class PW_EXTERN PDFName;
+class PW_EXTERN PDFDictionary;
+class PW_EXTERN PDFStreamInput;
 
 
-class IPDFParserExtender
+class PW_EXTERN IPDFParserExtender
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	virtual ~IPDFParserExtender(){}
 

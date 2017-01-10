@@ -19,17 +19,24 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "AbstractContentContext.h"
 
-class PDFTiledPattern;
+class PW_EXTERN PDFTiledPattern;
 
-class TiledPatternContentContext : public AbstractContentContext
+class PW_EXTERN TiledPatternContentContext : public AbstractContentContext
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	TiledPatternContentContext(PDFHummus::DocumentContext* inDocumentContext, PDFTiledPattern* inObject);
 	virtual ~TiledPatternContentContext(void);
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	// AbstractContentContext implementation
 	virtual ResourcesDictionary* GetResourcesDictionary();

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IByteReaderWithPosition.h"
 #include "MyStringBuf.h"
@@ -28,9 +29,12 @@
 
 
 
-class InputStringBufferStream : public IByteReaderWithPosition
+class PW_EXTERN InputStringBufferStream : public IByteReaderWithPosition
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	InputStringBufferStream(MyStringBuf* inBufferToReadFrom);
 	~InputStringBufferStream(void);
 
@@ -45,6 +49,9 @@ public:
 	virtual LongFilePositionType GetCurrentPosition();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 	MyStringBuf* mBufferToReadFrom;
 
 

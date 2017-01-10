@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "RefCountPtr.h"
 #include "PDFObject.h"
@@ -46,9 +47,12 @@ T* PDFObjectCast(PDFObject* inOriginal)
 }
 
 template <class T>
-class PDFObjectCastPtr : public RefCountPtr<T>
+class PW_EXTERN PDFObjectCastPtr : public RefCountPtr<T>
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	PDFObjectCastPtr():RefCountPtr<T>()
 	{
 	}

@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "EStatusCode.h"
 #include "OutputFile.h"
@@ -29,11 +30,14 @@
 
 
 
-class ObjectsContext;
+class PW_EXTERN ObjectsContext;
 
-class StateWriter
+class PW_EXTERN StateWriter
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	StateWriter(void);
 	virtual ~StateWriter(void);
 
@@ -43,6 +47,9 @@ public:
 	PDFHummus::EStatusCode Finish();
 
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	ObjectsContext* mObjectsContext;
 	OutputFile mOutputFile;

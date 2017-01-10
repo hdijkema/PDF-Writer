@@ -19,15 +19,19 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 
 #include "IDocumentContextExtender.h"
 
 // adapter class for IDocumentContextExtender interface.
 // note that you can't create it, just derive from it.
 
-class DocumentContextExtenderAdapter: public IDocumentContextExtender
+class PW_EXTERN DocumentContextExtenderAdapter: public IDocumentContextExtender
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 
 	// add items to the page dictionary while it's written
 	virtual PDFHummus::EStatusCode OnPageWrite(
@@ -148,6 +152,7 @@ public:
 
 
 protected:
+
 	DocumentContextExtenderAdapter(){}
 
 };

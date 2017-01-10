@@ -19,6 +19,7 @@
    
 */
 #pragma once
+#include "PDFWriterGlobal.h"
 #include "EStatusCode.h"
 #include "ObjectsBasicTypes.h"
 #include "PDFRectangle.h"
@@ -30,11 +31,14 @@
 
 typedef std::set<std::string> StringSet;
 
-class ObjectsContext;
+class PW_EXTERN ObjectsContext;
 
-class DictionaryContext
+class PW_EXTERN DictionaryContext
 {
 public:
+#ifdef _MSC_VER
+#  pragma warning(default:4251)
+#endif
 	DictionaryContext(ObjectsContext* inObjectsContext,size_t inIndentLevel);
 	~DictionaryContext(void);
 
@@ -62,6 +66,9 @@ public:
 	// multiline arrays)
 	void WriteIndents();
 private:
+#ifdef _MSC_VER
+#  pragma warning(disable:4251)
+#endif
 
 	ObjectsContext* mObjectsContext;
 	StringSet mKeys;
