@@ -36,6 +36,14 @@
 #
 # The headerfiles needed ara all .h files in the PDFWriter
 # directory and the LibAesgm directory.
+#
+# NB. I set
+#   #define _INCLUDE_TIFF_HEADER
+# in
+#   PDFWriterGlobal.h
+#
+# Because libtiff >= 4.0.0 was in place.
+#
 #-------------------------------------------------
 
 # Variables to set for the needed support libraries
@@ -48,6 +56,7 @@ TARGET = libpdfwriter
 TEMPLATE = lib
 
 INCLUDEPATH += $$PWD/../../LibAesgm
+
 
 win32: INCLUDEPATH += $$MYLIBDIR/include
 win32: INCLUDEPATH += $$MYLIBDIR/include/freetype
