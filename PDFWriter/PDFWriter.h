@@ -52,7 +52,7 @@ struct LogConfiguration
 																							LogFileLocation=inLogFileLocation;LogStream = NULL;}
 	LogConfiguration(bool inShouldLog,IByteWriter* inLogStream){ShouldLog = inShouldLog;LogStream = inLogStream;StartWithBOM = false;}
 
-	static const LogConfiguration& DefaultLogConfiguration();
+    static const PW_EXTERN LogConfiguration& DefaultLogConfiguration();
 };
 
 struct PDFCreationSettings

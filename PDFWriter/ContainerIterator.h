@@ -37,38 +37,26 @@
 
 // some minor template specialization to differ const lists from non const lists
 template <class T>
-class PW_EXTERN ContainerTraits
+class ContainerTraits
 {
 public:
-#ifdef _MSC_VER
-#  pragma warning(default:4251)
-#endif
-    
     typedef typename T::iterator iteratorType;
 
 };
 
 template <class T>
-class PW_EXTERN ContainerTraits<const T>
+class ContainerTraits<const T>
 {
 public:
-#ifdef _MSC_VER
-#  pragma warning(default:4251)
-#endif
-    
     typedef typename T::const_iterator iteratorType;
 
 };
 
 // the real deal
 template <class T>
-class PW_EXTERN ContainerIterator
+class ContainerIterator
 {
 public:
-#ifdef _MSC_VER
-#  pragma warning(default:4251)
-#endif
-    
 	ContainerIterator(T& inContainer);
 	ContainerIterator(const ContainerIterator<T>& inOtherIterator);
     
@@ -76,9 +64,6 @@ public:
 	bool IsFinished();
     
 private:
-#    ifdef _MSC_VER
-#      pragma warning(disable:4251)
-#    endif
 	typename ContainerTraits<T>::iteratorType mEndPosition;
 	bool mFirstMove;
     

@@ -38,13 +38,9 @@
 */
 
 template <class T>
-class PW_EXTERN SingleValueContainerIterator : public ContainerIterator<T>
+class SingleValueContainerIterator : public ContainerIterator<T>
 {
 public:
-#ifdef _MSC_VER
-#  pragma warning(default:4251)
-#endif
-
 	SingleValueContainerIterator(T& inContainer);
 	SingleValueContainerIterator(const SingleValueContainerIterator<T>& inOtherIterator);
 

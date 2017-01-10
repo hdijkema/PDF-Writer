@@ -35,13 +35,9 @@
 
 
 template <typename T>
-class PW_EXTERN RefCountPtr
+class RefCountPtr
 {
 public:
-#ifdef _MSC_VER
-#  pragma warning(default:4251)
-#endif
-
 	RefCountPtr();
 	// This one will not call AddRef (assume called from outside)
 	RefCountPtr(T* inValue);
@@ -72,9 +68,6 @@ public:
 	bool operator!() const;
 
 private:
-#ifdef _MSC_VER
-#  pragma warning(disable:4251)
-#endif
 	T* mValue;
 };
 

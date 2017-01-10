@@ -51,5 +51,5 @@ struct EncryptionOptions
 		OwnerPassword = inOwnerPassword;
 	}
 
-	static const EncryptionOptions& DefaultEncryptionOptions();
+    static const PW_EXTERN EncryptionOptions& DefaultEncryptionOptions();
 };
