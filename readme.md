@@ -1,4 +1,15 @@
-Welcome to PDF-Writer.   
+## About this version of PDF-Writer
+
+This is a clone of PDF-Writer (great work), that has been ammended to be able to compile it as a DLL on windows.
+The compilation has been done with Qt5.7 (MSVC2015), using a project in QtCreator (see directory PDFWriter/libpdfwriter,
+project file: libpdfwriter.pro).
+
+11/1/2017 - Hans
+
+
+
+## Welcome to PDF-Writer.   
+
 A Fast and Free C++ Library for Creating, Parsing an Manipulating PDF Files and Streams.   
 Documentation is available [here](https://github.com/galkahana/PDF-Writer/wiki).   
 Project site is [here](http://www.pdfhummus.com).   
