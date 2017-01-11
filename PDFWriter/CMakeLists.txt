@@ -1,32 +1,29 @@
 project(PDFWriter)
-
-# Soname
-# MAJOR is incremented when symbols are removed or changed in an incompatible way
-# MINOR is incremented when new symbols are added
-set(PDFWRITER_MAJOR 0)
-set(PDFWRITER_MINOR 0)
-set(PDFWRITER_LIB_VERSION ${PDFWRITER_MAJOR}.${PDFWRITER_MINOR}.0)
-set(PDFWRITER_SO_VERSION ${PDFWRITER_MAJOR})
-
-
-include_directories (${LIBAESGM_INCLUDE_DIRS})
-include_directories (${ZLIB_INCLUDE_DIRS})
+include_directories (${Zlib_SOURCE_DIR})
 
 if(NOT PDFHUMMUS_NO_DCT)
-	include_directories (${LIBJPEG_INCLUDE_DIRS})
+	include_directories (${LibJpeg_SOURCE_DIR})
 else(NOT PDFHUMMUS_NO_DCT)
 	add_definitions(-DPDFHUMMUS_NO_DCT=1)
 endif(NOT PDFHUMMUS_NO_DCT)
 
 if(NOT PDFHUMMUS_NO_TIFF)
-	include_directories (${LIBTIFF_INCLUDE_DIRS})
+	include_directories (${LibTiff_SOURCE_DIR})  
 else(NOT PDFHUMMUS_NO_TIFF)
 	add_definitions(-DPDFHUMMUS_NO_TIFF=1)
 endif(NOT PDFHUMMUS_NO_TIFF)
 
-include_directories (${FREETYPE_INCLUDE_DIRS})
+if(PDFHUMMUS_BIDI)
+	include_directories (${LibFribidi_SOURCE_DIR})  
+    ExternalProject_Get_Property(libFribidi install_dir)
+    include_directories(${install_dir}/build/include/fribidi)
+	add_definitions(-DPDFHUMMUS_BIDI=1)
+endif(PDFHUMMUS_BIDI)
+
+include_directories (${FreeType_SOURCE_DIR}/include) 
 add_library (PDFWriter 
 #sources
+UnicodeTextUtils.cpp
 AbstractContentContext.cpp
 AbstractWrittenFont.cpp
 ANSIFontWriter.cpp
@@ -168,8 +165,14 @@ WrittenFontCFF.cpp
 WrittenFontTrueType.cpp
 XCryptionCommon.cpp
 XObjectContentContext.cpp
+aes_modes.c
+aes_ni.c
+aescrypt.c
+aeskey.c
+aestab.c
 
 #headers
+UnicodeTextUtils.h
 AbstractContentContext.h
 AbstractWrittenFont.h
 AdapterIByteReaderWithPositionToIReadPositionProvider.h
@@ -358,19 +361,14 @@ WrittenFontRepresentation.h
 WrittenFontTrueType.h
 XCryptionCommon.h
 XObjectContentContext.h
-)
-target_link_libraries(PDFWriter ${LIBAESGM_LDFLAGS} ${LIBJPEG_LDFLAGS} ${ZLIB_LDFLAGS} ${LIBTIFF_LDFLAGS} ${FREETYPE_LDFLAGS})
-set_target_properties(PDFWriter PROPERTIES VERSION ${PDFWRITER_LIB_VERSION} SOVERSION ${PDFWRITER_SO_VERSION})
-
-install(TARGETS PDFWriter
-    RUNTIME DESTINATION bin COMPONENT libraries
-    ARCHIVE DESTINATION lib${LIB_SUFFIX} COMPONENT libraries
-    LIBRARY DESTINATION lib${LIB_SUFFIX} COMPONENT libraries
-)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DESTINATION include
-    FILES_MATCHING
-    PATTERN "*.h"
+aes.h
+aes_ni.h
+aes_via_ace.h
+aescpp.h
+aesopt.h
+aestab.h
+brg_endian.h
+brg_types.h
 )
 
 # groups definitions
@@ -794,3 +792,7 @@ source_group(Main FILES
 PDFWriter.cpp
 PDFWriter.h
 )
+
+if(PDFHUMMUS_BIDI)
+target_link_libraries(PDFWriter ${install_dir}/build/lib/libfribidi.a)
+endif(PDFHUMMUS_BIDI)

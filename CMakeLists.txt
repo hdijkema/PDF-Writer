@@ -1,40 +1,28 @@
+include(ExternalProject)
+
 project(PDFHUMMUS)
 cmake_minimum_required (VERSION 2.6)
 
-set(USE_BUNDLED TRUE CACHE BOOL "Whether to use bundled libraries")
+if(NOT PDFHUMMUS_NO_DCT)
+	ADD_SUBDIRECTORY(LibJpeg)
+endif(NOT PDFHUMMUS_NO_DCT)
+	ADD_SUBDIRECTORY(ZLib)
+if(NOT PDFHUMMUS_NO_TIFF)
+	ADD_SUBDIRECTORY(LibTiff)
+endif(NOT PDFHUMMUS_NO_TIFF)
+if(PDFHUMMUS_BIDI)
+  ExternalProject_Add(
+  libFribidi
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libFribidi
+  CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/libFribidi/bootstrap && ${CMAKE_CURRENT_SOURCE_DIR}/libFribidi/configure --prefix=<INSTALL_DIR>/build  --enable-static=yes --enable-shared=no
+  PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/libFribidi
+  BUILD_COMMAND make
+  BUILD_IN_SOURCE 0
+  
+)
 
-if(NOT USE_BUNDLED)
-    FIND_PACKAGE(PkgConfig)
+endif(PDFHUMMUS_BIDI)
 
-    PKG_CHECK_MODULES(LIBJPEG libjpeg)
-    if(NOT LIBJPEG_FOUND)
-        SET(PDFHUMMUS_NO_DCT TRUE)
-    endif(NOT LIBJPEG_FOUND)
-
-    PKG_CHECK_MODULES(ZLIB zlib REQUIRED)
-
-    PKG_CHECK_MODULES(LIBTIFF libtiff-4)
-    if(NOT LIBTIFF_FOUND)
-        SET(PDFHUMMUS_NO_TIFF TRUE)
-    else(NOT LIBTIFF_FOUND)
-        ADD_DEFINITIONS(-D_INCLUDE_TIFF_HEADER)
-    endif(NOT LIBTIFF_FOUND)
-
-    PKG_CHECK_MODULES(FREETYPE REQUIRED freetype2)
-
-    FIND_PATH(LIBAESGM_INCLUDE_DIRS aescpp.h /usr/local/include/aes /usr/include/aes)
-    FIND_LIBRARY(LIBAESGM_LDFLAGS NAMES aesgm PATHS /usr/local/lib${LIB_SUFFIX} /usr/lib${LIB_SUFFIX})
-
-else(NOT USE_BUNDLED)
-    ADD_SUBDIRECTORY(LibAesgm)
-    if(NOT PDFHUMMUS_NO_DCT)
-    ADD_SUBDIRECTORY(LibJpeg)
-    endif(NOT PDFHUMMUS_NO_DCT)
-    ADD_SUBDIRECTORY(ZLib)
-    if(NOT PDFHUMMUS_NO_TIFF)
-    ADD_SUBDIRECTORY(LibTiff)
-    endif(NOT PDFHUMMUS_NO_TIFF)
-    ADD_SUBDIRECTORY(FreeType)
-endif(NOT USE_BUNDLED)
+ADD_SUBDIRECTORY(FreeType)
 ADD_SUBDIRECTORY(PDFWriter)
 ADD_SUBDIRECTORY(PDFWriterTestPlayground)
