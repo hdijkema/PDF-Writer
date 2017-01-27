@@ -52,11 +52,13 @@ mac: MYLIBDIR = /Users/hans/devel/libraries
 
 QT       -= core gui
 
-TARGET = libpdfwriter
+win32: TARGET = libpdfwriter
+mac: TARGET = pdfwriter
 TEMPLATE = lib
 
 INCLUDEPATH += $$PWD/../../LibAesgm
 
+mac: QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.8
 
 win32: INCLUDEPATH += $$MYLIBDIR/include
 win32: INCLUDEPATH += $$MYLIBDIR/include/freetype
@@ -76,6 +78,13 @@ contains(QT_ARCH, i386) { # 32bit
 }
 win32: LIBS += -lzlib -llibjpeg -llibpng -lfreetype271 -llibtiff -lGdi32
 DEFINES += LIBPDFWRITER_LIBRARY
+
+mac: MYLIBDIR=/Users/hans/devel/libraries/osx
+mac: INCLUDEPATH += $$MYLIBDIR/include
+mac: INCLUDEPATH += $$MYLIBDIR/include/freetype2
+mac: LIBS += -L$$MYLIBDIR/lib
+mac: LIBS += -lfreetype -ljpeg -lpng -ltiff -lopenjp2 -lz
+#-framework CoreFoundation -framework CoreGraphics
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
